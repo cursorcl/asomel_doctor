@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="stylesheet" href="css/style.css">
+                <link rel="stylesheet" href="css/zabuto_calendar.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
 		<script src="js/modernizr.js"></script>
@@ -60,6 +61,8 @@
 		<script src="js/dbAccess.js"></script>
 		<script src="js/bootstrap-datepicker.js"></script>
 		<script src="js/bootstrap-datepicker.es.min.js"></script>
+                <script src="js/zabuto_calendar.min.js"></script>
+                
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK0n8A2_jBF5xiLSMoUwnt-ZFHW11PjIQ &callback=initMap">
 		</script>
 	</body>

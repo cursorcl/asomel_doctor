@@ -98,7 +98,18 @@ li a.active {
     border-color: #fff;
     margin-top: 4px;
 }
+.modal-backdrop {
+    z-index: 100000 !important;
+}
 
+.modal {
+    z-index: 100001 !important;
+}
+
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+    padding-right: 17px;
+}
 /*slider area*/
 
 .slider-row {
@@ -581,7 +592,7 @@ li a.active {
     height: 400px;
     position: relative;
     overflow: auto;
-	
+
 }
 .mapa button.btn-secondary {
     font-family: 'Open Sans', sans-serif;
@@ -596,10 +607,10 @@ li a.active {
     height: 830px;
     /*margin-top: 0px;*/
     left: 0;
-    
+
     background: rgba(0, 0, 0, 0.51);
-	margin-top: 40px;
-	
+    margin-top: 40px;
+
 }
 .contact-caption {
     margin-top: 120px;
@@ -608,7 +619,7 @@ li a.active {
 
 /* Reserva */
 .reserva {
-	margin-top: 40px;
+    margin-top: 40px;
 }
 .reserva-caption {
     background: #3a9dca;
@@ -743,7 +754,7 @@ li a.active {
 
 .reserva th {
     text-align: center;
-    
+
 }
 .reserva .td-name {
     vertical-align:middle;
@@ -1078,7 +1089,7 @@ responsive area
     .footer p {
         font-size: 10px;
     }
-	
+
 }
 
 

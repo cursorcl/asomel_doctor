@@ -88,13 +88,30 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <a href="#" class="btn btn-success btn-lg">
+                                <a href="#" class="btn btn-success btn-lg" id="show_calendar">
                                     <span class="glyphicon glyphicon-calendar"></span> Calendario 
                                 </a>
                             </div>
-                        </div>
-                    </div>
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
 
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Seleccione Día</h4>
+                                    </div>
+                                    <div class="modal-body" id="modal-body-calendar">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>                            
+                            
+                           
                 </div>	
                 <div class="col-md-12 reserva-form" style="display:none;" id="reserva-calendariodoctor">
                     <!-- 

@@ -72,6 +72,11 @@ $().ready(function () {
     });
 });
 
+
+$(document).ready(function () {
+    $
+    $("#my-calendar").zabuto_calendar({language: "es"});
+});
 function centerAt(source)
 {
     var index = parseInt(source) - 1;
@@ -198,7 +203,7 @@ $(document).ready(function () {
         e.preventDefault();
         var id_doctor = $('#cmbdoctor').val();
         var nombre_doctor = $('#cmbdoctor option:selected').text();
-        
+
         var id_sede = $('#cmbsedes').val();
         var nombre_sede = $('#cmbsedes option:selected').text();
         var d = new Date();
@@ -327,8 +332,10 @@ function mostrar_informacion_doctor(id_doctor, nombre_doctor, nombre_sede)
     $("#doctor-info").empty();
     line = "<li class='list-group-item active'> Especialidad: " + $('#cmbespecialidad option:selected').text() + "</li>";
     line = line + "<li class='list-group-item'> Profesional: " + nombre_doctor + "</li>";
-    line = line + "<li class='list-group-item'> Sede: " + nombre_sede;
-    +"</li>";
+    line = line + "<li class='list-group-item'> Sede: " + nombre_sede    +"</li>";
+
+    line = line + "<input type='hidden' id='nombre_sede' name='nombre_sede' value='" + nombre_sede + "'>";
+    line = line + "<input type='hidden' id='nombre_doctor' name='nombre_doctor' value='" + nombre_doctor + "'>";
 
     $("#doctor-info").append(line);
 }
@@ -369,6 +376,10 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
             });
             line = line + "</tbody>";
             line = line + "</table>";
+            line = line + "<input type='hidden' id='id_sede' name='id_sede' value='" + id_sede + "'>";
+            line = line + "<input type='hidden' id='id_doctor' name='id_doctor' value='" + id_doctor + "'>";
+            line = line + "<input type='hidden' id='fecha' name='fecha' value='" + nFecha + "'>";
+            line = line + "<input type='hidden' id='hora' name='hora' value='" + hora + "'>";
 
             $("#doctor-horas-libres").append(line);
         },
@@ -463,6 +474,72 @@ function funcHoras()
         }
     });
 }
+
+$(document).ready(function () {
+    $(document).ready(function () {
+        $("#my-calendar").zabuto_calendar({language: "en"});
+    });
+    $("#show_calendar").click(function (event) {
+
+        var id_sede = $("#id_sede").val();
+        var id_doctor = $("#id_doctor").val();
+        var fecha = $("#fecha").val();
+        var hora = $("#hora").val();
+        var nombre_doctor = $("#nombre_doctor").val();
+        var nombre_sede = $("#nombre_sede").val();        
+
+        $.ajax({
+            type: "GET",
+            url: "src/obtener_dias_libres_mes.php",
+            data: {"fecha": fecha, "id_doctor": id_doctor, "id_sede": id_sede, "hora": hora},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                
+            var eventData = [];
+            $.each(msg, function (index, item) {
+                var s = {"date":item.fecha, "badge": true, "title":""};
+                eventData.push(s);
+            });
+                $("#modal-body-calendar").empty();
+                $("#modal-body-calendar").append("<div id='my-calendar'></div>");
+                $("#my-calendar").zabuto_calendar({
+                    language: 'es',
+                    cell_border: true,
+                    today: true,
+                    show_days: false,
+                    weekstartson: 0,
+                    data: eventData,
+                    action: function () {
+                        return myDateFunction(this.id, id_doctor, nombre_doctor, id_sede, nombre_sede);
+                    },                 
+                    nav_icon: {
+                        prev: '<i class="fa fa-chevron-circle-left"></i>',
+                        next: '<i class="fa fa-chevron-circle-right"></i>'
+                    }
+                });
+                $('#myModal').modal('show');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+                alert("!! " + xhr.responseText + " !!");
+            }
+        });
+
+
+
+    });
+});
+
+function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
+        var date = $("#" + id).data("date");
+        var hasEvent = $("#" + id).data("hasEvent");
+        if(hasEvent)
+         mostrar_horas_doctor_dia(id_doctor, date, "00:00:00", nombre_doctor, id_sede, nombre_sede);
+        return true;
+    }
+
 
 //$("#selectmode").ajaxSubmit({url: 'src/server.php', type: 'post'})
 

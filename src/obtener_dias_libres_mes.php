@@ -7,25 +7,28 @@ if( isset($_GET["fecha"]) )
 {
     $fecha = utf8_encode($_GET["fecha"]);
 }
+
+
+$idPersona = 1;
+if( isset($_GET["id_doctor"]) )
+{
+    $idPersona = utf8_encode($_GET["id_doctor"]);
+}
+
 $hora = date("H:i:s");
 if( isset($_GET["hora"]) )
 {
     $hora = utf8_encode($_GET["hora"]);
 }
 
-$idPersona = 1;
-if( isset($_GET["idPersona"]) )
+$idSede =date("Y-m-d");
+if( isset($_GET["id_sede"]) )
 {
-    $idPersona = utf8_encode($_GET["idPersona"]);
+    $idSede = utf8_encode($_GET["id_sede"]);
 }
 
-$idSede = 1;
-if( isset($_GET["idSede"]) )
-{
-    $idSede = utf8_encode($_GET["idSede"]);
-}
-
-$sql = "SELECT distinct(fecha) as fecha FROM view_listado_horas_libres WHERE personalId= ".$idPersona." and sedeId = ".$idSede." and fecha = '".$fecha."' and horainicio > '".$hora."' order by horainicio asc";
+//$month = date("m",strtotime($fecha));
+$sql = "SELECT * FROM view_listado_horas_libres WHERE personalId= ".$idPersona." and sedeId = ".$idSede."  and fecha >= '".$fecha."' and horainicio > '".$hora."' order by horainicio asc";
     
     $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
     mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
