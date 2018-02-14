@@ -207,10 +207,67 @@ $(document).ready(function () {
         var id_sede = $('#cmbsedes').val();
         var nombre_sede = $('#cmbsedes option:selected').text();
         var d = new Date();
-        var fecha = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+        var fecha =    d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
         var hora = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
+        $.ajax({
+            type: "GET",
+            url: "src/obtener_siguiente_hora_x_doctor_fecha_hora.php",
+            data: {"sede": id_sede, "id_doctor": id_doctor, "fecha": fecha, "hora": hora},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                $("#reserva-listadodoctores").empty();
+                //Aqui debo agregar todos los doctores en el UL reserva-listadodoctores
+                $line = "<table class='table table-bordered' id='table-hours'>";
+                $line = $line + "<thead >";
+                $line = $line + "<tr>";
+                $line = $line + "<th>Profesional</th>";
+                $line = $line + "<th>Siguiente Hora</th>";
+                $line = $line + "<th>Agenda</th>";
+                $line = $line + "</tr>";
+                $line = $line + "</thead>";
+                $line = $line + "<tbody>";
+                $.each(msg, function (index, item) {
+                    var fechas = item.fecha.split("-");
+                    var fecha = fechas[2] + "-" + fechas[1] + "-" + fechas[0];
+                    var horas = item.horainicio.split(":");
+                    var hora = horas[0] + ":" + horas[1];
+                    var id = item.personalId + "." + fecha + "." + hora;
+                    $line = $line + "<tr>";
+                    $line = $line + "<td class='td-name'>" + item.personalNombre + "</td>";
+                    $line = $line + "<td class='td-centered' >" + fecha + " <br>" + hora + "</td>";
+                    $line = $line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + item.personalId + "'>VER  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
+                    $line = $line + "</tr>";
+                });
+                $line = $line + "</tbody>";
+                $line = $line + "</table>";
+                $("#reserva-listadodoctores").append($line);
+                document.getElementById('reserva-form-doctor').style.display = "none";
+                document.getElementById('reserva-form-especialidad').style.display = "none";
+                document.getElementById('div-reserva-listadodoctores').style.display = "block";
+                document.getElementById('reserva-presentadoctor').style.display = "none";
+                document.getElementById('reserva-calendariodoctor').style.display = "none";
 
-        mostrar_horas_doctor_dia(id_doctor, fecha, hora, nombre_doctor, id_sede, nombre_sede);
+                $("#table-hours").on('click', '.hora', function () {
+                    // Se va a mostrar las horas disponibles para el día seleccionado que sean mayores a la hora seleccionada.
+                    var currentRow = $(this).closest("tr");
+                    var texto = currentRow.find("td:eq(1)").text().split(" ");
+                    var dia = texto[0];
+                    var hora = texto[1];
+                    var doc = currentRow.find("td:eq(0)").text();
+                    var id = this.id;
+                    var idSede = $('#cmbsedes').val();
+
+                    mostrar_horas_doctor_dia(id, dia, hora, doc, idSede, nombre_sede);
+
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+                alert("!! " + xhr.responseText + " !!");
+            }
+        });
     });
 });
 
@@ -231,7 +288,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "GET",
-            url: "src/obtenerdoctores.php",
+            url: "src/obtener_doctores_especialidad_fecha_hora.php",
             data: {"sede": sede, "especialidad": especialidad, "fecha": fecha, "hora": hora},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -269,7 +326,7 @@ $(document).ready(function () {
                 document.getElementById('reserva-calendariodoctor').style.display = "none";
 
                 $("#table-hours").on('click', '.hora', function () {
-                    // get the current row
+                    // Se va a mostrar las horas disponibles para el día seleccionado que sean mayores a la hora seleccionada.
                     var currentRow = $(this).closest("tr");
                     var texto = currentRow.find("td:eq(1)").text().split(" ");
                     var dia = texto[0];
@@ -332,7 +389,7 @@ function mostrar_informacion_doctor(id_doctor, nombre_doctor, nombre_sede)
     $("#doctor-info").empty();
     line = "<li class='list-group-item active'> Especialidad: " + $('#cmbespecialidad option:selected').text() + "</li>";
     line = line + "<li class='list-group-item'> Profesional: " + nombre_doctor + "</li>";
-    line = line + "<li class='list-group-item'> Sede: " + nombre_sede    +"</li>";
+    line = line + "<li class='list-group-item'> Sede: " + nombre_sede + "</li>";
 
     line = line + "<input type='hidden' id='nombre_sede' name='nombre_sede' value='" + nombre_sede + "'>";
     line = line + "<input type='hidden' id='nombre_doctor' name='nombre_doctor' value='" + nombre_doctor + "'>";
@@ -359,7 +416,7 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            $("#reserva-doctor-content").empty();
+            $("#doctor-horas-libres").empty();
             line = "<table class='table table-bordered' id='table-hours-per-day'>";
             line = line + "<thead>";
             line = line + "<tr>";
@@ -368,12 +425,20 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
             line = line + "</tr>";
             line = line + "</thead>";
             line = line + "<tbody>";
+            var exists = false;
             $.each(msg, function (index, item) {
                 line = line + "<tr>";
-                line = line + "<td class='td-centered' >" + item.horainicio + "</td>";
+                line = line + "<td class='td-centered' >" + item.fecha + "</td>";
                 line = line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + item.personalId + "'>RESERVAR  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
                 line = line + "</tr>";
+                exists = true;
             });
+            if (exists === false)
+            {
+                line = line + "<tr>";
+                line = line + "<td class='td-centered' colspan='2'> No hay horas disponibles para la fecha indicada</td>";
+                line = line + "</tr>";
+            }
             line = line + "</tbody>";
             line = line + "</table>";
             line = line + "<input type='hidden' id='id_sede' name='id_sede' value='" + id_sede + "'>";
@@ -486,7 +551,7 @@ $(document).ready(function () {
         var fecha = $("#fecha").val();
         var hora = $("#hora").val();
         var nombre_doctor = $("#nombre_doctor").val();
-        var nombre_sede = $("#nombre_sede").val();        
+        var nombre_sede = $("#nombre_sede").val();
 
         $.ajax({
             type: "GET",
@@ -495,12 +560,12 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
-                
-            var eventData = [];
-            $.each(msg, function (index, item) {
-                var s = {"date":item.fecha, "badge": true, "title":""};
-                eventData.push(s);
-            });
+
+                var eventData = [];
+                $.each(msg, function (index, item) {
+                    var s = {"date": item.fecha, "badge": true, "title": ""};
+                    eventData.push(s);
+                });
                 $("#modal-body-calendar").empty();
                 $("#modal-body-calendar").append("<div id='my-calendar'></div>");
                 $("#my-calendar").zabuto_calendar({
@@ -512,7 +577,7 @@ $(document).ready(function () {
                     data: eventData,
                     action: function () {
                         return myDateFunction(this.id, id_doctor, nombre_doctor, id_sede, nombre_sede);
-                    },                 
+                    },
                     nav_icon: {
                         prev: '<i class="fa fa-chevron-circle-left"></i>',
                         next: '<i class="fa fa-chevron-circle-right"></i>'
@@ -533,12 +598,12 @@ $(document).ready(function () {
 });
 
 function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
-        var date = $("#" + id).data("date");
-        var hasEvent = $("#" + id).data("hasEvent");
-        if(hasEvent)
-         mostrar_horas_doctor_dia(id_doctor, date, "00:00:00", nombre_doctor, id_sede, nombre_sede);
-        return true;
-    }
+    var date = $("#" + id).data("date");
+    var hasEvent = $("#" + id).data("hasEvent");
+    if (hasEvent)
+        mostrar_horas_doctor_dia(id_doctor, date, "00:00:00", nombre_doctor, id_sede, nombre_sede);
+    return true;
+}
 
 
 //$("#selectmode").ajaxSubmit({url: 'src/server.php', type: 'post'})

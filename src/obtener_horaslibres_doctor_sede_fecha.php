@@ -25,7 +25,7 @@ if( isset($_GET["idSede"]) )
     $idSede = utf8_encode($_GET["idSede"]);
 }
 
-$sql = "SELECT distinct(horainicio) as fecha FROM view_listado_horas_libres WHERE personalId= ".$idPersona." and sedeId = ".$idSede." and fecha = '".$fecha."' and horainicio > '".$hora."' order by horainicio asc";
+$sql = "SELECT distinct(horainicio) as fecha FROM view_listado_horas_libres WHERE personalId= ".$idPersona." and sedeId = ".$idSede." and fecha = '".$fecha."' and horainicio >= '".$hora."' order by horainicio asc";
     
     $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
     mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
