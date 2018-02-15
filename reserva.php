@@ -53,7 +53,6 @@
                         </div>
                     </form>
                 </div>	
-
                 <div class="col-md-5 col-md-offset-4 reserva-form" style="display:none;" id="div-reserva-listadodoctores">
                     <!-- 
                             Aquí se llena la lista de doctores con su primera hora disponible 
@@ -95,31 +94,57 @@
                             <div class="modal fade" id="myModal" role="dialog">
                                 <div class="modal-dialog">
 
-                                  <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                      <h4 class="modal-title">Seleccione Día</h4>
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Seleccione Día</h4>
+                                        </div>
+                                        <div class="modal-body" id="modal-body-calendar">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body" id="modal-body-calendar">
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                  </div>
 
                                 </div>
-                              </div>                            
-                            
-                           
-                </div>	
-                <div class="col-md-12 reserva-form" style="display:none;" id="reserva-calendariodoctor">
-                    <!-- 
-                            Se presenta el calendario con las horas disponibles para el doctor seleccionado.
-                    -->
-                </div>	
+                            </div>                            
 
+
+                        </div>	
+                        <div class="col-md-12 reserva-form" style="display:none;" id="reserva-calendariodoctor">
+                            <!-- 
+                                    Se presenta el calendario con las horas disponibles para el doctor seleccionado.
+                            -->
+                        </div>	
+                    </div>
+                </div>
+
+                <div id="reserva-hora-paciente" class="col-md-5 col-md-offset-4 reserva-forms" >
+                    <!-- 
+                            Se presenta la información del doctor seleccionado. 
+                            Presenta la lista de horas dispobibles para la primera hora en adelante.
+                            Además tiene un botón para presentar le calendario de disponibilidades para el doctor.
+                    -->						    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img alt="" src="" class="img-circle img-thumbnail" id="img-doctor-reserva"/>
+                        </div>
+                        <div class="col-md-9" >
+                            <ul class="list-group reserva-lbl-info" id="doctor-info-reserva">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Presenta en destacado la fecha y hora de la reserva -->
+                        <div class="col-md-12 lbl-info" id="horas-info-reserva">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Solicita la información del cliente. -->
+                        <?php include "solicita-hora.php"; ?> 
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+            </section>
