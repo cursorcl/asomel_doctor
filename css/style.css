@@ -708,6 +708,14 @@ li a.active {
     border: 0;
     margin-bottom: 12px;
 }
+
+.col-form-label {
+    color: #fff;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    margin-bottom: 0;
+}
+
 .info-detail {
     border-top: 1px solid #53cde5;
     padding-top: 15px;
