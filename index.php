@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="stylesheet" href="css/style.css">
+                <link rel="stylesheet" href="css/reserva.css">
                 <link rel="stylesheet" href="css/zabuto_calendar.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>

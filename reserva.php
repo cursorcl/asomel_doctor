@@ -10,10 +10,10 @@
                         <div class="col-lg-6 col-lg-offset-3 text-center">
                             <form>
                                 <label class="radio-inline active" >
-                                    <input type="radio" name="optradio" value="xdoctor" checked="">Búsqueda por Doctor
+                                    <input type="radio"  name="optradio" value="xdoctor" checked="">Búsqueda por Doctor
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="optradio" value="xespecialidad" >Búsqueda por Especialidad
+                                    <input type="radio"  name="optradio" value="xespecialidad" >Búsqueda por Especialidad
                                 </label>
                             </form>
                         </div>
@@ -120,31 +120,15 @@
                     </div>
                 </div>
 
-                <div id="reserva-hora-paciente" class="col-md-5 col-md-offset-4 reserva-forms" >
+                <div id="reserva-hora-paciente" style="display:none;" class="col-md-5 col-md-offset-4 reserva-forms" >
                     <!-- 
                             Se presenta la información del doctor seleccionado. 
                             Presenta la lista de horas dispobibles para la primera hora en adelante.
                             Además tiene un botón para presentar le calendario de disponibilidades para el doctor.
-                    -->						    
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img alt="" src="" class="img-circle img-thumbnail" id="img-doctor-reserva"/>
-                        </div>
-                        <div class="col-md-9" >
-                            <ul class="list-group reserva-lbl-info" id="doctor-info-reserva">
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- Presenta en destacado la fecha y hora de la reserva -->
-                        <div class="col-md-12 lbl-info" id="horas-info-reserva">
+                    -->	
+                    <?php include "solicita-hora.php"; ?>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- Solicita la información del cliente. -->
-                        <?php include "solicita-hora.php"; ?> 
-                    </div>
+
                 </div>
             </div>
             </section>

@@ -1,0 +1,230 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-02-2018, 16:19:48
+    Author     : cursor
+*/
+
+/* Reserva */
+.reserva {
+    margin-top: 40px;
+}
+.reserva-caption {
+    background: #3a9dca;
+}
+.reserva-heading h2 {
+    color: #fff;
+    font-size: 90px;
+}
+.reserva-info {
+    padding-left: 40px;
+}
+.reserva-info h3 {
+    padding-left: 0;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px solid #13849c;
+    padding-bottom: 12px;
+    margin-bottom: 0;
+}
+.reserva-form h3 {
+    padding-left: 0;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px solid #13849c;
+    padding-bottom: 12px;
+    margin-bottom: 0;
+}
+.reserva-info ul {
+    margin: 0;
+    padding: 0;
+}
+.reserva-info ul li {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #fff;
+}
+.reserva-info i.fa {
+    font-size: 16px;
+    padding-right: 12px;
+    width: 25px;
+    height: 38px;
+}
+.reserva-info ul li span {
+    font-weight: bold;
+}
+/*.reserva-form input {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    font-size: 13px;
+    color: #084a5c;
+    font-family: 'Open Sans', sans-serif;
+    padding: 12px;
+    border: 0;
+    margin-bottom: 12px;
+}*/
+
+.reserva-form select {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    font-size: 13px;
+    color: #084a5c;
+    font-family: 'Open Sans', sans-serif;
+    padding: 12px;
+    border: 0;
+    margin-bottom: 12px;
+}
+
+.datepicker {
+    background: #fff;
+    font-size: 13px;
+    color: #084a5c;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.reserva-form textarea {
+    font-family: 'Open Sans', sans-serif;
+    padding: 12px;
+    width: 100%;
+    height: 140px;
+    border: 0;
+    margin-bottom: 12px;
+}
+
+.col-form-label {
+    color: #fff;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+    margin-bottom: 0;
+}
+.reserva-form .contact-form input {
+    width: 100%;
+    height: 40px;
+    background: #f0ad4e;
+    font-size: 13px;
+    color: #084a5c;
+    font-family: 'Open Sans', sans-serif;
+    padding: 12px;
+    border: 0;
+    margin-bottom: 12px;
+}
+
+.reserva-form input.submit-btn {
+    width: 180px;
+    height: 50px;
+    float: right;
+    font-size: 24px;
+    color: #fff;
+    background: url(../img/btn-bg.jpg);
+    background-repeat: no-repeat;
+    padding: 0;
+    font-family: 'BenchNine', sans-serif;
+    font-weight: bold;
+}
+
+
+.reserva-form input.submit-btn {
+    width: 180px;
+    height: 50px;
+    float: right;
+    font-size: 24px;
+    color: #fff;
+    background: url(../img/btn-bg.jpg);
+    background-repeat: no-repeat;
+    padding: 0;
+    font-family: 'BenchNine', sans-serif;
+    font-weight: bold;
+}
+.reserva-form {
+    padding-right: 40px;
+}
+.reserva table
+{
+    margin-top:20px;
+}
+.reserva table thead
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    background:#0676a5;
+    color:#fff;
+    align:center;
+}
+
+.reserva table
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    vertical-align:middle;
+}
+
+.reserva th {
+    text-align: center;
+
+}
+.reserva .td-name {
+    vertical-align:middle;
+    color:#fff;
+}
+.reserva .td-centered {
+    text-align: center;
+    vertical-align:middle;
+    color:#fff;
+}
+
+.info-detail {
+    border-top: 1px solid #53cde5;
+    padding-top: 15px;
+}
+.form {
+    border-top: 1px solid #53cde5;
+    padding-top: 15px;
+    text-align: right;
+}
+
+.reserva-lbl-info {
+    font-size: 12px;
+    font-family: 'BenchNine', sans-serif;
+    font-weight: bold;    
+} 
+
+
+.reserva h3 {
+    font-size: 26px;
+    color: #fff;
+    margin-top: 0;
+}
+
+.reserva h4 {
+    font-size: 20px;
+    color: #fff;
+    margin-top: 0;
+}
+
+.reserva p {
+    font-size: 18px;
+    color: #fff;
+    margin-top: 0;
+}
+
+#container-radios {
+    border-width: 2px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.reserva .form {
+    border-top: 0px solid #53cde5;
+    padding-top: 15px;
+    text-align: right;
+}
+/* Reserva */

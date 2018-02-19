@@ -147,6 +147,7 @@ $(document).ready(function () {
         document.getElementById('div-reserva-listadodoctores').style.display = "none";
         document.getElementById('reserva-presentadoctor').style.display = "none";
         document.getElementById('reserva-calendariodoctor').style.display = "none";
+        document.getElementById('reserva-hora-paciente').style.display = "none";
 
     });
 });
@@ -207,7 +208,7 @@ $(document).ready(function () {
         var id_sede = $('#cmbsedes').val();
         var nombre_sede = $('#cmbsedes option:selected').text();
         var d = new Date();
-        var fecha =    d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+        var fecha = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
         var hora = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
         $.ajax({
             type: "GET",
@@ -247,6 +248,7 @@ $(document).ready(function () {
                 document.getElementById('div-reserva-listadodoctores').style.display = "block";
                 document.getElementById('reserva-presentadoctor').style.display = "none";
                 document.getElementById('reserva-calendariodoctor').style.display = "none";
+                document.getElementById('reserva-hora-paciente').style.display = "none";
 
                 $("#table-hours").on('click', '.hora', function () {
                     // Se va a mostrar las horas disponibles para el día seleccionado que sean mayores a la hora seleccionada.
@@ -324,6 +326,7 @@ $(document).ready(function () {
                 document.getElementById('div-reserva-listadodoctores').style.display = "block";
                 document.getElementById('reserva-presentadoctor').style.display = "none";
                 document.getElementById('reserva-calendariodoctor').style.display = "none";
+                document.getElementById('reserva-hora-paciente').style.display = "none";
 
                 $("#table-hours").on('click', '.hora', function () {
                     // Se va a mostrar las horas disponibles para el día seleccionado que sean mayores a la hora seleccionada.
@@ -373,6 +376,7 @@ function mostrar_horas_doctor_dia(id_doctor, fecha_dia, hora, nombre_doctor, id_
     document.getElementById('div-reserva-listadodoctores').style.display = "none";
     document.getElementById('reserva-presentadoctor').style.display = "block";
     document.getElementById('reserva-calendariodoctor').style.display = "none";
+    document.getElementById('reserva-hora-paciente').style.display = "none";
 }
 
 /**
@@ -395,6 +399,12 @@ function mostrar_informacion_doctor(id_doctor, nombre_doctor, nombre_sede)
     line = line + "<input type='hidden' id='nombre_doctor' name='nombre_doctor' value='" + nombre_doctor + "'>";
 
     $("#doctor-info").append(line);
+
+
+    $("#doctor-info-reserva").empty();
+    $("#img-doctor-reserva").attr('src', 'img/doctors/' + id_doctor + ".png");
+    $("#img-doctor-reserva").attr('alt', nombre_doctor);
+    $("#doctor-info-reserva").append(line);
 }
 
 /**
@@ -447,6 +457,20 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
             line = line + "<input type='hidden' id='hora' name='hora' value='" + hora + "'>";
 
             $("#doctor-horas-libres").append(line);
+
+            $("#table-hours-per-day").on('click', '.hora', function () {
+                // Se va a mostrar las horas disponibles para el día seleccionado que sean mayores a la hora seleccionada.
+
+                document.getElementById('reserva-form-doctor').style.display = "none";
+                document.getElementById('reserva-form-especialidad').style.display = "none";
+                document.getElementById('div-reserva-listadodoctores').style.display = "none";
+                document.getElementById('reserva-presentadoctor').style.display = "none";
+                document.getElementById('reserva-calendariodoctor').style.display = "none";
+                document.getElementById('reserva-hora-paciente').style.display = "block";
+
+                $('#hora-de-reserva').empty();
+                $('#hora-de-reserva').append("Día: " + fecha_dia  + " a las " + hora);
+            });
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
