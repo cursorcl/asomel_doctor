@@ -120,7 +120,7 @@
                     </div>
                 </div>
 
-                <div id="reserva-hora-paciente" style="display:none;" class="col-md-5 col-md-offset-4 reserva-forms" >
+                <div id="reserva-hora-paciente" style="display:none;" class="col-md-12 reserva-forms" >
                     <!-- 
                             Se presenta la información del doctor seleccionado. 
                             Presenta la lista de horas dispobibles para la primera hora en adelante.

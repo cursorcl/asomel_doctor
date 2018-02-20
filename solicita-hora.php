@@ -1,8 +1,6 @@
-<div class="row">
+<div class="col-md-5">
     <div class="col-md-3">
-        <div class="col-md-12">
-            <img alt="" src="" class="img-circle img-thumbnail" id="img-doctor-reserva"/>
-        </div>
+        <img alt="" src="" class="img-thumbnail" id="img-doctor-reserva"/>
     </div>
     <div class="col-md-9" >
         <ul class="list-group reserva-lbl-info" id="doctor-info-reserva">
@@ -10,7 +8,7 @@
         <h3 id="hora-de-reserva">LA HORA</h3>
     </div>
 </div>	
-<div class="row">    
+<div class="col-md-7">    
     <div class="contact-form">
         <form class="form" >
             <div class="row">
@@ -77,8 +75,8 @@
                     <div class="col-md-6">
                         <input class="submit-btn" type="submit" value="CONFIRMAR">
                     </div>
-                    
-                    
+
+
                 </div>
             </div>
         </form>
