@@ -1,3 +1,4 @@
+
 var map;
 var panorama;
 var positions = [];
@@ -469,7 +470,7 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
                 document.getElementById('reserva-hora-paciente').style.display = "block";
 
                 $('#hora-de-reserva').empty();
-                $('#hora-de-reserva').append("Día: " + fecha_dia  + " a las " + hora);
+                $('#hora-de-reserva').append("Día: " + fecha_dia + " a las " + hora);
             });
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -568,6 +569,7 @@ $(document).ready(function () {
     $(document).ready(function () {
         $("#my-calendar").zabuto_calendar({language: "en"});
     });
+
     $("#show_calendar").click(function (event) {
 
         var id_sede = $("#id_sede").val();
@@ -630,5 +632,31 @@ function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
 }
 
 
-//$("#selectmode").ajaxSubmit({url: 'src/server.php', type: 'post'})
+/**
+ * Asociamos el evento de perdidad de foco del rut en el formulario de reserva.
+ * 
+ * Una vez que se pierde el foco, se hace lo siguiente:
+ * 1) Se valida y formatea el rut correspondiente.
+ * 2) Una vez validado se busca en la base de datos.
+ * 3) Si se encuentra se llenan los datos asociados.
+ * 4) No se encuentra, se habilita formulario que pide los datos del paciente.
+ */
+$().ready(function () {
+    $("#inputRut").focusout(function () {
+        var tmpRut = $("#inputRut").val();    
+        if(validate(tmpRut))
+        {
+            $("#inputRut").val(format(tmpRut))
+        }
+        
+    }
+    );
+
+});
+
+
+
+
+
+
 

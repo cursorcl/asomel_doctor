@@ -597,6 +597,11 @@ li a.active {
 }
 
 
+.img-doctor{
+   padding:1px;
+   border:1px solid #ffffff;
+   background-color:#ff0;
+}
 /*gmap*/
 
 .map {

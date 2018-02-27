@@ -11,9 +11,12 @@ and open the template in the editor.
 /* Reserva */
 .reserva {
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 .reserva-caption {
     background: #3a9dca;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
 }
 .reserva-heading h2 {
     color: #fff;

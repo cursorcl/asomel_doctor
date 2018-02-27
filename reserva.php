@@ -63,34 +63,38 @@
                     <!--<ul class="list-group" id="reserva-listadodoctores">
                     </ul>-->							
                 </div>	
-                <div class="col-md-5 col-md-offset-4 reserva-form" style="display:none;" id="reserva-presentadoctor">
+                <div class="col-md-12 reserva-form" style="display:none;" id="reserva-presentadoctor">
                     <!-- 
                             Se presenta la información del doctor seleccionado. 
                             Presenta la lista de horas dispobibles para la primera hora en adelante.
                             Además tiene un botón para presentar le calendario de disponibilidades para el doctor.
                     -->						    
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="col-md-12">
-                                    <img alt="" src="" class="img-circle img-thumbnail" id="img_doctor"/>
+
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img alt="" src="" class="img-doctor img-responsive" id="img_doctor"/>
                                 </div>
-                            </div>
-                            <div class="col-md-9" >
-                                <ul class="list-group reserva-lbl-info" id="doctor-info">
-                                </ul>
+                                <div class="col-md-9" >
+                                    <ul class="list-group reserva-lbl-info" id="doctor-info">
+                                    </ul>
+                                </div>
                             </div>
                             <div class="row">
-                                <!-- se presentan las horas dispobibles del doctor para ese dia -->
-                                <div class="col-md-12 lbl-info" id="doctor-horas-libres">
+                                <input class="submit-btn" type="submit" value="CALENDARIO" id="show_calendar">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <!-- se presentan las horas dispobibles del doctor para ese dia -->
+                            <div class="col-md-12 lbl-info" id="doctor-horas-libres">
 
-                                </div>
                             </div>
-                            <div class="form-group">
-                                <a href="#" class="btn btn-success btn-lg" id="show_calendar">
-                                    <span class="glyphicon glyphicon-calendar"></span> Calendario 
-                                </a>
-                            </div>
+                        </div>
+
+                        <div class="row">
+
+
                             <div class="modal fade" id="myModal" role="dialog">
                                 <div class="modal-dialog">
 
