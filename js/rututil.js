@@ -1,4 +1,3 @@
-'use strict';
 
 function clean (rut) {
   return typeof rut === 'string'
@@ -39,5 +38,3 @@ function format (rut) {
 
   return result;
 }
-
-module.exports = { validate: validate, clean: clean, format: format };

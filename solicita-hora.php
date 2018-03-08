@@ -29,7 +29,7 @@
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="show_email" type="text" class="form-control" name="show_email" placeholder="Email" disabled>
+                                <input id="show_email" type="text" class="form-control" name="show_email" placeholder="Email">
                             </div>
                         </div>
                     </div>

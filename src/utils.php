@@ -14,15 +14,15 @@ function valiadte_rut($_rut) {
     $dv = substr($tmp_rut, -1);
     $rut = substr($tmp_rut, 0, -1);
     $result = "-1";
-    if (is_numeric($rut) && len($rut) >= 7) {
+    
+    if (is_numeric($rut) && strlen($rut) >= 7) {
         $mult = 2;
         $sum = 0;
-        $digits = str_split($rut);
-        $n = sizeof($digits);
-        while ($n > 0) {
-            $digit = $digits[n - 1];
+        $digits = intval($rut);
+        while ($digits > 0) {
+            $digit = $digits % 10;
             $sum = $sum + $digit * $mult;
-            $n--;
+            $digits =  floor($digits/ 10);
             $mult++;
             if ($mult > 7) {
                 $mult = 2;
@@ -31,7 +31,7 @@ function valiadte_rut($_rut) {
         $result = 11 - ($sum % 11);
     }
 
-    return $result === $dv || ($result === 10 && $dv === "K");
+    return "$result" === $dv || ($result === 10 && $dv === "K");
 }
 
 /**

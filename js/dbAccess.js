@@ -499,7 +499,7 @@ $(document).ready(function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
-                    $("#cmbdoctorsespecialidad").get(0).options.length = 0;
+                    $("#cmbdoctorsespecialidad").get(0).empty();
                     $("#cmbdoctorsespecialidad").get(0).options[0] = new Option("Seleccione Especialista...", "-1");
                     $.each(msg, function (index, item) {
                         $("#cmbdoctorsespecialidad").get(0).options[$("#cmbdoctorsespecialidad").get(0).options.length] = new Option(item.personalNombre, item.personalId);
@@ -643,12 +643,45 @@ function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
  */
 $().ready(function () {
     $("#inputRut").focusout(function () {
-        var tmpRut = $("#inputRut").val();    
-        if(validate(tmpRut))
+        var tmpRut = $("#inputRut").val();
+        if (validate(tmpRut))
         {
             $("#inputRut").val(format(tmpRut))
+            var searchRut = clean(format(tmpRut));
+            $.ajax({
+                type: "GET",
+                url: "src/obtener_paciente_x_rut.php",
+                data: {"rut": searchRut},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    var founded = false;
+                    $.each(msg, function (index, item) {
+                        founded = true;
+                        $("#show_email").val(item.email);
+                        $("#show_phone").val(item.phone);
+                        $("#show_client_name").val(item.name);
+                        
+                    });
+                    if (!founded)
+                    {
+                        document.getElementById('muestra_datos_paciente').style.display = "none";
+                        document.getElementById('solicita_datos_paciente').style.display = "block";
+
+                    } else {
+                        document.getElementById('muestra_datos_paciente').style.display = "block";
+                        document.getElementById('solicita_datos_paciente').style.display = "none";
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    alert("!! " + xhr.responseText + " !!");
+                }
+            });
+
         }
-        
+
     }
     );
 
