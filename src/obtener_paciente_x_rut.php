@@ -14,7 +14,7 @@ if (!valiadte_rut($tmp_rut)) {
 $dv = substr($tmp_rut, -1);
 $rut = substr($tmp_rut, 0, -1);
 
-$sql = "SELECT p.pacienteNroFicha as fileNumber, p.pacienteRut as rut, upper(p.pacienteDv) as dv, upper(p.pacienteNombre) as name, r.email as email, p.pacienteTelefono as phone FROM pacientes p, datosReserva r where trim(p.pacienteRut) = $rut and upper(p.pacienteDv)=$dv and trim(p.pacienteRut) = trim(r.pacienteRut) and upper(p.pacienteDv) = upper(r.pacienteDv)";
+$sql = "SELECT p.pacienteNroFicha as fileNumber, p.pacienteRut as rut, upper(p.pacienteDv) as dv, upper(p.pacienteNombre) as name, p.pacienteTelefono as phone FROM pacientes p where trim(p.pacienteRut) = $rut and upper(p.pacienteDv)=$dv";
 $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
 

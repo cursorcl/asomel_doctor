@@ -642,11 +642,11 @@ function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
  * 4) No se encuentra, se habilita formulario que pide los datos del paciente.
  */
 $().ready(function () {
-    $("#inputRut").focusout(function () {
-        var tmpRut = $("#inputRut").val();
+    $("#input_rut").focusout(function () {
+        var tmpRut = $("#input_rut").val();
         if (validate(tmpRut))
         {
-            $("#inputRut").val(format(tmpRut))
+            $("#input_rut").val(format(tmpRut))
             var searchRut = clean(format(tmpRut));
             $.ajax({
                 type: "GET",
@@ -687,6 +687,39 @@ $().ready(function () {
 
 });
 
+$().ready(function () {
+    $("#submit_reserva_hora").click(function () {
+        // AQUI DEBO VALIDAR LOS DATOS
+        var tmpRut = $("#input_rut").val();
+        if (validate(tmpRut))
+        {
+            var searchRut = clean(format(tmpRut));
+            $.ajax({
+                type: "GET",
+                url: "src/registrar_horas_para_paciente.php",
+                data: {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor":id_doctor, "input_email": email},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    //Aqui debo verificar que fue almacenado exitosamente o fallidamente
+                    if(msg === "exito")
+                    {
+                        // FUE ALMACENADO
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    alert("!! " + xhr.responseText + " !!");
+                }
+            });
+
+        }
+
+    }
+    );
+
+});
 
 
 
