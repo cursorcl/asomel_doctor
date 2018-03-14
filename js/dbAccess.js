@@ -691,20 +691,11 @@ $().ready(function () {
     $("#submit_reserva_hora").click(function () {
         // AQUI DEBO VALIDAR LOS DATOS
         var tmpRut = $("#input_rut").val();
-        var hora = $("#hota").val();
+        var hora = $("#hora").val();
         var fecha = $("#fecha").val();
         var id_doctor = $("#id_doctor").val();
         var email = $("#input_email").val();
         
-//         $('input[type=radio][name=optradio]').change(function () {
-//        if (this.value === 'xdoctor') {
-//            
-//        }
-//        else 
-//        {
-//            
-//        }
-
         if (validate(tmpRut))
         {
             var searchRut = clean(format(tmpRut));
