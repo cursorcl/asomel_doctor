@@ -530,40 +530,40 @@ $(document).ready(function () {
             funcHoras();
         }
     });
-    $("#cmbdoctor").change(function (event) {
-
-        profesional = $(this).val();
-        if (fecha && profesional)
-        {
-            funcHoras();
-        }
-    });
+//    $("#cmbdoctor").change(function (event) {
+//
+//        profesional = $(this).val();
+//        if (fecha && profesional)
+//        {
+//            funcHoras();
+//        }
+//    });
 });
 
-function funcHoras()
-{
-    $('#horas').removeAttr('disabled');
-    $('#horas').empty();
-    $.ajax({
-        type: "GET",
-        url: "src/horas.php",
-        data: {"dia": fecha, "profesional": profesional},
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            $("#horas").get(0).options.length = 0;
-            $("#horas").get(0).options[0] = new Option("Seleccione Especialista...", "-1");
-            $.each(msg, function (index, item) {
-                $("#horas").get(0).options[$("#horas").get(0).options.length] = new Option(item.personalNombre, item.personalId);
-            });
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(xhr.status);
-            alert(thrownError);
-            alert("!! " + xhr.responseText + " !!");
-        }
-    });
-}
+//function funcHoras()
+//{
+//    $('#horas').removeAttr('disabled');
+//    $('#horas').empty();
+//    $.ajax({
+//        type: "GET",
+//        url: "src/obtener_horaslibres_docotr_sede_fecha.php",
+//        data: {"dia": fecha, "profesional": profesional},
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: function (msg) {
+//            $("#horas").get(0).options.length = 0;
+//            $("#horas").get(0).options[0] = new Option("Seleccione Especialista...", "-1");
+//            $.each(msg, function (index, item) {
+//                $("#horas").get(0).options[$("#horas").get(0).options.length] = new Option(item.personalNombre, item.personalId);
+//            });
+//        },
+//        error: function (xhr, ajaxOptions, thrownError) {
+//            alert(xhr.status);
+//            alert(thrownError);
+//            alert("!! " + xhr.responseText + " !!");
+//        }
+//    });
+//}
 
 $(document).ready(function () {
     $(document).ready(function () {
@@ -658,10 +658,10 @@ $().ready(function () {
                     var founded = false;
                     $.each(msg, function (index, item) {
                         founded = true;
-                        $("#show_email").val(item.email);
+                        $("#input_email").val(item.email);
                         $("#show_phone").val(item.phone);
                         $("#show_client_name").val(item.name);
-                        
+
                     });
                     if (!founded)
                     {
@@ -691,18 +691,32 @@ $().ready(function () {
     $("#submit_reserva_hora").click(function () {
         // AQUI DEBO VALIDAR LOS DATOS
         var tmpRut = $("#input_rut").val();
+        var hora = $("#hota").val();
+        var fecha = $("#fecha").val();
+        var id_doctor = $("#id_doctor").val();
+        var email = $("#input_email").val();
+        
+//         $('input[type=radio][name=optradio]').change(function () {
+//        if (this.value === 'xdoctor') {
+//            
+//        }
+//        else 
+//        {
+//            
+//        }
+
         if (validate(tmpRut))
         {
             var searchRut = clean(format(tmpRut));
             $.ajax({
                 type: "GET",
                 url: "src/registrar_horas_para_paciente.php",
-                data: {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor":id_doctor, "input_email": email},
+                data: {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor": id_doctor, "input_email": email},
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
                     //Aqui debo verificar que fue almacenado exitosamente o fallidamente
-                    if(msg === "exito")
+                    if (msg === "exito")
                     {
                         // FUE ALMACENADO
                     }

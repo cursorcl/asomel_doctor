@@ -25,7 +25,7 @@ if (!valiadte_rut($input_rut)) {
     die();
 }
 
-$dv = substr($input_rut, -1);
+    $dv = substr($input_rut, -1);
 $rut = substr($input_rut, 0, -1);
 
 if (!isset($_GET["input_paterno"]) || !isset($_GET["input_materno"]) || !isset($_GET["input_nombres"]) || !isset($_GET["input_phone"])) {

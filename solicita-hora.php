@@ -22,25 +22,26 @@
                     </div>
                 </div>
             </div>           
-            <div id="muestra_datos_paciente" >
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="show_email" class="col-md-2 col-form-label">Email</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="show_email" type="text" class="form-control" name="show_email" placeholder="Email">
-                            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="input_email" class="col-md-2 col-form-label">Email</label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input id="input_email" type="text" class="form-control" name="input_email" placeholder="Email">
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="muestra_datos_paciente" >
+
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label for="show_phone" class="col-md-2 col-form-label">TelÃ©fono</label>
+                        <label for="show_phone" class="col-md-2 col-form-label">Teléfono</label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input type="tel" class="form-control" name="show_phone" id="show_phone" placeholder="TelÃ©fono" disabled>
+                                <input type="tel" class="form-control" name="show_phone" id="show_phone" placeholder="Teléfono" disabled>
                             </div>
                         </div>
                     </div>
@@ -59,17 +60,6 @@
             </div>
 
             <div id="solicita_datos_paciente" style="display:none;">
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="input_email" class="col-md-2 col-form-label">Email</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="input_email" type="text" class="form-control" name="input_email" placeholder="Email">
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label for="input_phone" class="col-md-2 col-form-label">TelÃ©fono</label>
@@ -118,11 +108,12 @@
             </div>
             <div> <!-- contiene solo campos ocultos utiles para el formulario y procesamiento
                   los valores ocultos son la fecha, la hora, el doctor
-                  -->
-                  <input type="hidden"  name="fecha" id="fecha" />
-                  <input type="hidden"  name="hora" id="hora" />
-                  
-                  
+                -->
+                <input type="hidden"  name="fecha" id="fecha" />
+                <input type="hidden"  name="hora" id="hora" />
+                <input type="hidden"  name="id_doctor" id="id_doctor" />
+
+
             </div>
             <div class="row">
                 <div class="col-md-12">
