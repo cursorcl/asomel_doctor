@@ -695,7 +695,7 @@ $().ready(function () {
         var fecha = $("#fecha").val();
         var id_doctor = $("#id_doctor").val();
         var email = $("#input_email").val();
-        
+
         if (validate(tmpRut))
         {
             var searchRut = clean(format(tmpRut));
@@ -710,6 +710,9 @@ $().ready(function () {
                     if (msg === "exito")
                     {
                         // FUE ALMACENADO
+                        
+                        document.getElementById('solicita-hora-resultado').style.display = "block";
+                        document.getElementById('solicita-hora').style.display = "none";
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {

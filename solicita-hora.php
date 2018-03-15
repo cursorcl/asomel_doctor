@@ -8,7 +8,7 @@
         <h3 id="hora-de-reserva">LA HORA</h3>
     </div>
 </div>	
-<div class="col-md-7">    
+<div class="col-md-7" id='solicita-hora'>    
     <div class="contact-form">
         <form class="form" id="reserva-form-usuario" >
             <div class="row">
@@ -106,6 +106,7 @@
                     </div>
                 </div>
             </div>
+
             <div> <!-- contiene solo campos ocultos utiles para el formulario y procesamiento
                   los valores ocultos son la fecha, la hora, el doctor
                 -->
@@ -129,4 +130,8 @@
             </div>
         </form>
     </div>
+</div>
+<div class="col-md-7" id='solicita-hora-resultado' style="display:none;">  
+    Se ha registrado su hora, se le ha enviado un correo.
+    <input class="submit-btn" type="submit" id="submit_reserva_hora_volver" value="INICIO">
 </div>
