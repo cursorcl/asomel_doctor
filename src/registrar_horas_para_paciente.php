@@ -55,12 +55,12 @@ mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
 mysqli_query($conexion, "START TRANSACTION");
 $sql = "insert into reserva values ($id_doctor, '$fecha', '$hora', '$rut', '$dv', '$nombre', '$input_email', '$input_phone')";
 if (!$result = mysqli_query($conexion, $sql)) {
-    mysql_query("ROLLBACK");
+    mysqli_query($conexion,"ROLLBACK");
     die();
 }
 $sql = "update horas set tomada=2 where personalId='$id_doctor' and fecha='$fecha' and horaInicio='$hora'";
 if (!$result = mysqli_query($conexion, $sql)) {
-    mysql_query("ROLLBACK");
+    mysqli_query($conexion,"ROLLBACK");
     die();
 }
 
@@ -71,19 +71,19 @@ $key = md5($key);
 
 $sql = "insert into horas_por_confirmar values ( '$id_doctor','$fecha','$hora', '$key')";
 if (!$result = mysqli_query($conexion, $sql)) {
-    mysql_query("ROLLBACK");
+    mysqli_query($conexion,"ROLLBACK");
     die();
 }
 
 mysqli_query($conexion, "COMMIT");
 $close = mysqli_close($conexion);
 
-$to = $input_email;
-$subject = "Confirmación de hora";
-$txt = "Confirmación de hora http://localhost/doctor/confirmar/confirmar_reserva.php";
-$headers = "From: <eosorio@sisdef.cl>\r\n";
-
-mail($to,$subject,$txt,$headers);
+//$to = $input_email;
+//$subject = "Confirmación de hora";
+//$txt = "Confirmación de hora http://localhost/doctor/confirmar/confirmar_reserva.php";
+//$headers = "From: <eosorio@sisdef.cl>\r\n";
+//
+//mail($to,$subject,$txt,$headers);
 echo json_encode("exito");
 //echo "SON:".$i;
 ?>

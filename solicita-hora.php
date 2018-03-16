@@ -133,5 +133,9 @@
 </div>
 <div class="col-md-7" id='solicita-hora-resultado' style="display:none;">  
     Se ha registrado su hora, se le ha enviado un correo.
-    <input class="submit-btn" type="submit" id="submit_reserva_hora_volver" value="INICIO">
+    <form class="form"  >
+        <input class="submit-btn" type="submit" id="submit_reserva_hora_volver" value="INICIO">
+    </form>
+    
+    
 </div>
