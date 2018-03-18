@@ -8,7 +8,7 @@
         <h3 id="hora-de-reserva">LA HORA</h3>
     </div>
 </div>	
-<div class="col-md-7" id='solicita-hora'>    
+<div class="col-md-7" id='solicita-hora' style="display:block;">    
     <div class="contact-form">
         <form class="form" id="reserva-form-usuario" >
             <div class="row">
@@ -37,11 +37,11 @@
 
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label for="show_phone" class="col-md-2 col-form-label">Teléfono</label>
+                        <label for="show_phone" class="col-md-2 col-form-label">TelÃ©fono</label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input type="tel" class="form-control" name="show_phone" id="show_phone" placeholder="Teléfono" disabled>
+                                <input type="tel" readonly  class="form-control" name="show_phone" id="show_phone" placeholder="Teléfono">
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input type="text" class="form-control" name="show_client_name" id="show_client_name" placeholder="Paciente" disabled>
+                                <input type="text" readonly  class="form-control" name="show_client_name" id="show_client_name" placeholder="Paciente">
                             </div>
                         </div>
                     </div>
@@ -62,11 +62,11 @@
             <div id="solicita_datos_paciente" style="display:none;">
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label for="input_phone" class="col-md-2 col-form-label">TelÃ©fono</label>
+                        <label for="input_phone" class="col-md-2 col-form-label">TelÃƒÂ©fono</label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input type="tel" class="form-control" name="input_phone" id="input_phone" placeholder="TelÃ©fono">
+                                <input type="tel" class="form-control" name="input_phone" id="input_phone" placeholder="Teléfono">
                             </div>
                         </div>
                     </div>
@@ -131,11 +131,40 @@
         </form>
     </div>
 </div>
-<div class="col-md-7" id='solicita-hora-resultado' style="display:none;">  
-    Se ha registrado su hora, se le ha enviado un correo.
-    <form class="form"  >
-        <input class="submit-btn" type="submit" id="submit_reserva_hora_volver" value="INICIO">
-    </form>
-    
-    
+
+<div id="solicita-hora-resultado" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Registro de hora</h4>
+      </div>
+      <div class="modal-body">
+        <p>La hora ha sido registrada con exito.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="solicita-hora-error" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Registro de hora</h4>
+      </div>
+      <div class="modal-body">
+        <p>Se ha producido un error al registrar su hora.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
 </div>

@@ -55,23 +55,23 @@ mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
 mysqli_query($conexion, "START TRANSACTION");
 $sql = "insert into reserva values ($id_doctor, '$fecha', '$hora', '$rut', '$dv', '$nombre', '$input_email', '$input_phone')";
 if (!$result = mysqli_query($conexion, $sql)) {
-    mysqli_query($conexion,"ROLLBACK");
+    mysqli_query($conexion, "ROLLBACK");
     die();
 }
 $sql = "update horas set tomada=2 where personalId='$id_doctor' and fecha='$fecha' and horaInicio='$hora'";
 if (!$result = mysqli_query($conexion, $sql)) {
-    mysqli_query($conexion,"ROLLBACK");
+    mysqli_query($conexion, "ROLLBACK");
     die();
 }
 
 
 //create a random key
-$key = $nombre . $input_email . date('mY');
+$key = $nombre . $input_email . $hora . $id_doctor . $rut . date('mY');
 $key = md5($key);
 
 $sql = "insert into horas_por_confirmar values ( '$id_doctor','$fecha','$hora', '$key')";
 if (!$result = mysqli_query($conexion, $sql)) {
-    mysqli_query($conexion,"ROLLBACK");
+    mysqli_query($conexion, "ROLLBACK");
     die();
 }
 
@@ -85,5 +85,4 @@ $close = mysqli_close($conexion);
 //
 //mail($to,$subject,$txt,$headers);
 echo json_encode("exito");
-//echo "SON:".$i;
 ?>

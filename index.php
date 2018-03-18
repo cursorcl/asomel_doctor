@@ -13,6 +13,7 @@
                 <link rel="stylesheet" href="css/reserva.css">
                 <link rel="stylesheet" href="css/search_rut.css">
                 <link rel="stylesheet" href="css/zabuto_calendar.min.css">
+                <link rel="stylesheet" href="css/jquery.modal.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
 		<script src="js/modernizr.js"></script>
@@ -63,6 +64,7 @@
 		<script src="js/dbAccess.js"></script>
                 <script src="js/rututil.js"></script>
 		<script src="js/bootstrap-datepicker.js"></script>
+                <script src="js/jquery.modal.min.js"></script>
 		<script src="js/bootstrap-datepicker.es.min.js"></script>
                 <script src="js/zabuto_calendar.min.js"></script>
                 

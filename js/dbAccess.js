@@ -229,6 +229,7 @@ $(document).ready(function () {
                 $line = $line + "</tr>";
                 $line = $line + "</thead>";
                 $line = $line + "<tbody>";
+                var hasdata = false;
                 $.each(msg, function (index, item) {
                     var fechas = item.fecha.split("-");
                     var fecha = fechas[2] + "-" + fechas[1] + "-" + fechas[0];
@@ -240,7 +241,14 @@ $(document).ready(function () {
                     $line = $line + "<td class='td-centered' >" + fecha + " <br>" + hora + "</td>";
                     $line = $line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + item.personalId + "'>VER  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
                     $line = $line + "</tr>";
+                    hasdata = true;
                 });
+                if (!hasdata)
+                {
+                    $line = $line + "<tr>";
+                    $line = $line + "<td class='td-name' colspan='3'>No hay horas disponibles </td>";
+                    $line = $line + "</tr>";
+                }
                 $line = $line + "</tbody>";
                 $line = $line + "</table>";
                 $("#reserva-listadodoctores").append($line);
@@ -688,8 +696,9 @@ $().ready(function () {
 });
 
 $().ready(function () {
-    $("#submit_reserva_hora").click(function () {
+    $("#submit_reserva_hora").click(function (e) {
         // AQUI DEBO VALIDAR LOS DATOS
+        e.preventDefault();
         var tmpRut = $("#input_rut").val();
         var hora = $("#hora").val();
         var fecha = $("#fecha").val();
@@ -709,10 +718,16 @@ $().ready(function () {
                     //Aqui debo verificar que fue almacenado exitosamente o fallidamente
                     if (msg === "exito")
                     {
-                        // FUE ALMACENADO
-                        
-                        document.getElementById('solicita-hora-resultado').style.display = "block";
-                        document.getElementById('solicita-hora').style.display = "none";
+                        show_simple_modal("success", "Reserva de hora", "Su hora ha sido reservada exitosamente.", function (result) {
+                            $("#reserva-form-usuario").submit();
+                            return true;
+                        });
+                    } else
+                    {
+                        show_simple_modal("error ", "Reserva de hora", "Su hora no ha sido reservada exitosamente.", function (result) {
+                            $("#reserva-form-usuario").submit();
+                            return true;
+                        });
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -728,6 +743,50 @@ $().ready(function () {
     );
 
 });
+
+function show_simple_modal(type, title, text, callback)
+{
+    modal({
+        type: type, //Type of Modal Box (alert | confirm | prompt | success | warning | error | info | inverted | primary)
+        title: title, //Modal Title
+        text: text, //Modal HTML Content
+        size: 'normal', //Modal Size (normal | large | small)
+        buttons: [{
+                text: 'OK', //Button Text
+                val: 'ok', //Button Value
+                eKey: true, //Enter Keypress
+                addClass: 'btn-light-blue', //Button Classes (btn-large | btn-small | btn-green | btn-light-green | btn-purple | btn-orange | btn-pink | btn-turquoise | btn-blue | btn-light-blue | btn-light-red | btn-red | btn-yellow | btn-white | btn-black | btn-rounded | btn-circle | btn-square | btn-disabled)
+                onClick: function (dialog) {
+                    return true;
+                }
+            }, ],
+        center: true, //Center Modal Box?
+        autoclose: false, //Auto Close Modal Box?
+        callback: callback, //Callback Function after close Modal (ex: function(result){alert(result); return true;})
+        onShow: function (r) {}, //After show Modal function
+        closeClick: true, //Close Modal on click near the box
+        closable: true, //If Modal is closable
+        theme: 'atlant', //Modal Custom Theme (xenon | atlant | reseted)
+        animate: false, //Slide animation
+        background: 'rgba(0,0,0,0.35)', //Background Color, it can be null
+        zIndex: 1050, //z-index
+        buttonText: {
+            ok: 'OK',
+            yes: 'SI',
+            cancel: 'CANCELAR'
+        },
+        template: '<div class="modal-box"><div class="modal-inner"><div class="modal-title"><a class="modal-close-btn"></a></div><div class="modal-text"></div><div class="modal-buttons"></div></div></div>',
+        _classes: {
+            box: '.modal-box',
+            boxInner: ".modal-inner",
+            title: '.modal-title',
+            content: '.modal-text',
+            buttons: '.modal-buttons',
+            closebtn: '.modal-close-btn'
+        }
+    });
+
+}
 
 
 

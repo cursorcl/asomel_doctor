@@ -230,4 +230,8 @@ and open the template in the editor.
     padding-top: 15px;
     text-align: right;
 }
+
+.reserva h4.modal-title {
+    color: #ff0000;
+}
 /* Reserva */
