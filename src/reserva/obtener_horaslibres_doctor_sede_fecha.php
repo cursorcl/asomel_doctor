@@ -1,6 +1,6 @@
 <?php
 // Obtiene horarios de los doctores que son de una especialidad específica  en una sede en partícular
-include_once(dirname(__FILE__).'/global.php');
+include_once(dirname(__FILE__).'/../global.php');
 
 $fecha = date("Y-m-d");
 if( isset($_GET["fecha"]) )

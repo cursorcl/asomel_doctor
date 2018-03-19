@@ -1,7 +1,7 @@
 <?php
 
-include_once(dirname(__FILE__) . '/utils.php');
-include_once(dirname(__FILE__) . '/global.php');
+include_once(dirname(__FILE__) . '/../utils.php');
+include_once(dirname(__FILE__) . '/../global.php');
 if (isset($_GET["rut"])) {
     $tmp_rut = utf8_encode($_GET["rut"]);
 } else {

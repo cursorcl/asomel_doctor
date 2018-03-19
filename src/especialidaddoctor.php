@@ -2,11 +2,11 @@
 
 include_once(dirname(__FILE__).'/global.php');
 
-$sql = "select p.personalId as personalId, p.personalNombre as personalNombre from personal p join especialidadDoctor e where (p.personalId = e.personalId)";
+$sql = "select p.personalId as personalId, p.personalNombre as personalNombre from personal p";
 if( isset($_GET["id"]) )
 {
     $id = utf8_encode($_GET["id"]);
-    $sql = $sql." and e.especialidadId = ".$id;
+    $sql = $sql." where  upper(p.personalTipo)= '".strtoupper($id)."'";
 }
 
 

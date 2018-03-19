@@ -1,6 +1,6 @@
 <?php
 // Obtiene horarios de los doctores que son de una especialidad específica  en una sede en partícular
-include_once(dirname(__FILE__).'/global.php');
+include_once(dirname(__FILE__).'/../global.php');
 
 $fecha = date("Y-m-d");
 //$fecha =  date("Y-m-d", strtotime("2017-12-07"));
@@ -14,12 +14,14 @@ if( isset($_GET["hora"]) )
 {
     $hora = utf8_encode($_GET["hora"]);
 }
-$sql =  "SELECT personalId, personalNombre, fecha, horainicio, sedeId,  min(TIMESTAMP(fecha, horainicio)) FROM view_listado_horas_libres WHERE TIMESTAMP(fecha, horainicio) > TIMESTAMP('".$fecha."', '".$hora."') ";
-if( isset($_GET["especialidad"]) )
+
+$id_doctor = 0;
+//$hora = date("H:i:s", strtotime("08:00:00"));
+if( isset($_GET["id_doctor"]) )
 {
-    $especialidad = utf8_encode($_GET["especialidad"]);
-	$sql = $sql. " and especialidadId=".$especialidad;
+    $id_doctor = utf8_encode($_GET["id_doctor"]);
 }
+$sql =  "SELECT personalId, personalNombre, fecha, horainicio, sedeId,  min(TIMESTAMP(fecha, horainicio)) FROM view_listado_horas_libres WHERE TIMESTAMP(fecha, horainicio) > TIMESTAMP('".$fecha."', '".$hora."') and personalId = ".$id_doctor;
 if( isset($_GET["sede"]) )
 {
     $sede = utf8_encode($_GET["sede"]);

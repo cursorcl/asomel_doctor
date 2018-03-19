@@ -7,7 +7,7 @@
  * 1) El rut que está solicitando la hora ya existe como cliente.
  * 2) El rut que está solicitando la hora no existe como cliente.
  */
-include_once(dirname(__FILE__) . '/global.php');
+include_once(dirname(__FILE__) . '/../global.php');
 
 
 // estos son los datos mínimos para establecer un registro.
@@ -35,8 +35,6 @@ if (!isset($_GET["input_paterno"]) || !isset($_GET["input_materno"]) || !isset($
     if (!$result = mysqli_query($conexion, $sql)) {
         die();
     }
-
-
     $row = mysqli_fetch_assoc($result);
     $nombre = $row['pacienteNombre'];
     $input_phone = $row['pacienteTelefono'];

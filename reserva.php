@@ -130,7 +130,7 @@
                             Presenta la lista de horas dispobibles para la primera hora en adelante.
                             Además tiene un botón para presentar le calendario de disponibilidades para el doctor.
                     -->	
-                    <?php include "solicita-hora.php"; ?>
+                    <?php include "src/reserva/solicita-hora.php"; ?>
 
 
                 </div>

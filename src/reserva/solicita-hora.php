@@ -33,19 +33,18 @@
                     </div>
                 </div>
             </div>
-            <div id="muestra_datos_paciente" >
-
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="show_phone" class="col-md-2 col-form-label">TelÃ©fono</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input type="tel" readonly  class="form-control" name="show_phone" id="show_phone" placeholder="Teléfono">
-                            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="input_phone" class="col-md-2 col-form-label">Teléfono</label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                            <input type="tel" class="form-control" name="input_phone" id="input_phone" placeholder="Teléfono">
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="muestra_datos_paciente" >
                 <div class="row">                
                     <div class="form-group col-md-12">
                         <label for="show_client_name" class="col-md-2 col-form-label">Paciente</label>
@@ -60,17 +59,7 @@
             </div>
 
             <div id="solicita_datos_paciente" style="display:none;">
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="input_phone" class="col-md-2 col-form-label">TelÃƒÂ©fono</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input type="tel" class="form-control" name="input_phone" id="input_phone" placeholder="Teléfono">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="row">                
                     <div class="form-group col-md-12">
                         <label for="input_paterno" class="col-md-2 col-form-label">Apellido Paterno</label>
@@ -133,38 +122,38 @@
 </div>
 
 <div id="solicita-hora-resultado" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Registro de hora</h4>
-      </div>
-      <div class="modal-body">
-        <p>La hora ha sido registrada con exito.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registro de hora</h4>
+            </div>
+            <div class="modal-body">
+                <p>La hora ha sido registrada con exito.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
     </div>
-
-  </div>
 </div>
 
 <div id="solicita-hora-error" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Registro de hora</h4>
-      </div>
-      <div class="modal-body">
-        <p>Se ha producido un error al registrar su hora.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registro de hora</h4>
+            </div>
+            <div class="modal-body">
+                <p>Se ha producido un error al registrar su hora.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
 
-  </div>
+    </div>
 </div>
