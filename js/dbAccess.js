@@ -426,8 +426,9 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
         dataType: "json",
         success: function (msg) {
             $("#doctor-horas-libres").empty();
-            line = "<p> Horas disponibles para el día: " + fecha_dia + "</p>";
-            line = line + "<table class='table table-bordered' id='table-hours-per-day'>";
+            
+            line = "<p> Horas disponibles para el día: " + fecha_dia;
+            line = line + "<table class='table table-bordered table-condensed' id='table-hours-per-day'>";
             line = line + "<thead>";
             line = line + "<tr>";
             line = line + "<th>Hora Inicio</th>";
@@ -439,7 +440,7 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
             $.each(msg, function (index, item) {
                 line = line + "<tr>";
                 line = line + "<td class='td-centered' >" + item.fecha + "</td>";
-                line = line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + item.personalId + "'>RESERVAR  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
+                line = line + "<td class='td-centered'><button type='button' class='btn btn-primary btn-xs btn-block hora' id='" + item.personalId + "'>RESERVAR  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
                 line = line + "</tr>";
                 exists = true;
             });
@@ -559,6 +560,9 @@ $(document).ready(function () {
                     var s = {"date": item.fecha, "badge": true, "title": ""};
                     eventData.push(s);
                 });
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = now.getMonth() + 1;
                 $("#modal-body-calendar").empty();
                 $("#modal-body-calendar").append("<div id='my-calendar'></div>");
                 $("#my-calendar").zabuto_calendar({
@@ -568,13 +572,15 @@ $(document).ready(function () {
                     show_days: false,
                     weekstartson: 0,
                     data: eventData,
+                    show_previus: false,
+                    show_next: 6,
                     action: function () {
                         return myDateFunction(this.id, id_doctor, nombre_doctor, id_sede, nombre_sede);
                     },
-                    nav_icon: {
-                        prev: '<i class="fa fa-chevron-circle-left"></i>',
-                        next: '<i class="fa fa-chevron-circle-right"></i>'
-                    }
+//                    nav_icon: {
+//                        prev: '<i class="fa fa-chevron-circle-left"></i>',
+//                        next: '<i class="fa fa-chevron-circle-right"></i>'
+//                    }
                 });
                 $('#myModal').modal('show');
             },
@@ -592,9 +598,13 @@ $(document).ready(function () {
 
 function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
     var date = $("#" + id).data("date");
+    var pFechas = date.split("-");
+    var nFecha = pFechas[2] + "-" + pFechas[1] + "-" + pFechas[0];
     var hasEvent = $("#" + id).data("hasEvent");
     if (hasEvent)
-        mostrar_horas_doctor_dia(id_doctor, date, "00:00:00", nombre_doctor, id_sede, nombre_sede);
+    {
+        mostrar_horas_doctor_dia(id_doctor, nFecha, "00:00:00", nombre_doctor, id_sede, nombre_sede);
+    }
     return true;
 }
 

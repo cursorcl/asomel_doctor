@@ -33,6 +33,7 @@
                         </div>
                         <div class="form-group">
                             <input class="submit-btn" type="submit" value="BUSCAR" id="btnsubmitdoctor" disabled>
+                            <input class="submit-btn" type="submit" value="INICIO">
                         </div>
                     </form>
                 </div>
@@ -50,6 +51,7 @@
                         </div>
                         <div class="form-group">
                             <input class="submit-btn" type="submit" value="BUSCAR" id="btnsubmitespecialidad" disabled>
+                            <input class="submit-btn" type="submit" value="INICIO">
                         </div>
                     </form>
                 </div>	
@@ -83,6 +85,7 @@
                             </div>
                             <div class="row">
                                 <input class="submit-btn" type="submit" value="CALENDARIO" id="show_calendar">
+                                <input class='submit-btn' type='submit' value='INICIO'>;
                             </div>
                         </div>
                         <div class="col-md-7">
