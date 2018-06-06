@@ -1,4 +1,4 @@
-<section class="contact">
+<section class="contact" id="contact">
     <div class="container">
         <div class="row">
             <div class="contact-caption clearfix">
@@ -39,12 +39,12 @@
                 </div>
                 <div class="col-md-6 col-md-offset-1 contact-form">
                     <h3>Deje un Mensaje</h3>
-                    <form class="form">
-                        <input class="name" type="text" placeholder="Nombre">
-                        <input class="email" type="email" placeholder="Correo">
-                        <input class="phone" type="text" placeholder="Teléfono:">
-                        <textarea class="message" name="message" id="message" cols="30" rows="10" placeholder="Mensaje"></textarea>
-                        <input class="submit-btn" type="submit" value="ENVIAR">
+                    <form class="form" id="contact-form">
+                        <input class="name" type="text" id="contact-name" placeholder="Nombre">
+                        <input class="email" type="email"  id="contact-email" placeholder="Correo">
+                        <input class="phone" type="text" id="contact-phone" placeholder="Teléfono:">
+                        <textarea class="message" name="message" id="contact-message"  cols="30" rows="10" placeholder="Mensaje"></textarea>
+                        <input class="submit-btn" type="submit" id="contact-submit"  value="ENVIAR">
                     </form>
                 </div>
             </div>

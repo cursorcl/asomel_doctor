@@ -2,7 +2,7 @@
 
 /**
  * Esta función valida que el rut ingresado sea correcto.
- * @param type $_rut El rut que se quiere validar
+ * @param String $_rut El rut que se quiere validar
  * @return boolean
  */
 function valiadte_rut($_rut) {
@@ -38,7 +38,7 @@ function valiadte_rut($_rut) {
  * Obtiene solo la sección del número del rut.
  * 
  * Hay que tener en cuenta que se toma el número tal y como viene, sin hacer validaciones.
- * @param type $_rut El rut al que se le quiere extraer la primera parte.
+ * @param String $_rut El rut al que se le quiere extraer la primera parte.
  * @return String
  */
 function get_number_rut($_rut) {
@@ -52,7 +52,7 @@ function get_number_rut($_rut) {
  * Obtiene solo el dígito verificador.
  *
  * Hay que tener en cuenta que se toma el número tal y como viene, sin hacer validaciones.
- * @param type $_rut El rut al que se le quiere extraer el dígito verificador.
+ * @param String $_rut El rut al que se le quiere extraer el dígito verificador.
  * @return String
  */
 function get_dv($_rut) {
@@ -68,7 +68,7 @@ function get_dv($_rut) {
  * Obtiene solo el dígito verificador.
  *
  * Hay que tener en cuenta que se toma el número tal y como viene, sin hacer validaciones.
- * @param type $_rut El rut al que se le quiere extraer el dígito verificador.
+ * @param String $_rut El rut al que se le quiere extraer el dígito verificador.
  * @return String
  */
 function get_formatted_rut($_rut) {

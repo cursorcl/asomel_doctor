@@ -664,6 +664,23 @@ $().ready(function () {
 
 });
 
+$('#contact-form').on('submit', function(event){
+   e.preventDefault();
+  var name = $("#contact-name").val(); 
+  var email = $("#contact-email").val();
+  var phone = $("#contact-phone").val();
+  var text = $("#contact-text").val();
+  var message = $("#contact-message").val();
+  $.ajax({
+    type:'POST',
+    data: {"name": name, "email": email, "phone": phone, "text": text, "message": message },
+    url:'src/send_email.php',
+    success:function(data) {
+      //alert(data);
+    }
+  });
+});
+
 $().ready(function () {
     $("#submit_reserva_hora").click(function (e) {
         // AQUI DEBO VALIDAR LOS DATOS
