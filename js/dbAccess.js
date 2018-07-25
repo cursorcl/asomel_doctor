@@ -693,7 +693,7 @@ $().ready(function () {
         var tmpRut = $("#input_rut").val();
         var email = $("#input_email").val();
         var input_phone = $("#input_phone").val();
-        parametros = {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor": id_doctor, "input_email": email, "input_phone": input_phone};
+        
         if ($('#solicita_datos_paciente').css('display') !== 'none')
         {
             // atributos que solo están visibles cuando el rut no es cliente.
@@ -708,6 +708,7 @@ $().ready(function () {
         if (validate(tmpRut))
         {
             var searchRut = clean(format(tmpRut));
+            parametros = {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor": id_doctor, "input_email": email, "input_phone": input_phone};
             $.ajax({
                 type: "GET",
                 url: "src/reserva/registrar_horas_para_paciente.php",
@@ -716,7 +717,8 @@ $().ready(function () {
                 dataType: "json",
                 success: function (msg) {
                     //Aqui debo verificar que fue almacenado exitosamente o fallidamente
-                    if (msg === "exito")
+                    
+                    if (msg["resultado"] === "exito")
                     {
                         show_simple_modal("success", "Reserva de hora", "Su hora ha sido reservada exitosamente.", function (result) {
                             $("#reserva-form-usuario").submit();

@@ -2,7 +2,7 @@
 
 include_once(dirname(__FILE__).'/global.php');
 
-$sql = "SELECT personalId, personalNombre FROM personal where personalTipo ='T' order by personalNombre";
+$sql = "SELECT p.personalId, p.personalNombre FROM personal p, personal_web w where p.personalId=w.personalId and w.pagina=1 order by personalNombre";
 $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
 

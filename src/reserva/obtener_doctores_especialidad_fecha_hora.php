@@ -14,11 +14,17 @@ if( isset($_GET["hora"]) )
 {
     $hora = utf8_encode($_GET["hora"]);
 }
-$sql =  "SELECT personalId, personalNombre, fecha, horainicio, sedeId,  min(TIMESTAMP(fecha, horainicio)) FROM view_listado_horas_libres WHERE TIMESTAMP(fecha, horainicio) > TIMESTAMP('".$fecha."', '".$hora."') ";
+$sql =  "SELECT l.personalId, l.personalNombre, l.fecha, l.horainicio, l.sedeId,  min(TIMESTAMP(l.fecha, l.horainicio)) " ;
 if( isset($_GET["especialidad"]) )
 {
+    $sql = $sql . " FROM view_listado_horas_libres l, especialidadDoctor  d WHERE TIMESTAMP(l.fecha, l.horainicio) > TIMESTAMP('".$fecha."', '".$hora."') ";
+
     $especialidad = utf8_encode($_GET["especialidad"]);
-	$sql = $sql. " and personalTipo='".$especialidad."'";
+	$sql = $sql. " and d.especialidadId=".$especialidad." and l.personalId = d.personalId";
+}
+else
+{
+    $sql = $sql . " FROM view_listado_horas_libres l WHERE TIMESTAMP(l.fecha, l.horainicio) > TIMESTAMP('".$fecha."', '".$hora."') ";
 }
 if( isset($_GET["sede"]) )
 {
