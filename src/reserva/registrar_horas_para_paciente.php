@@ -59,27 +59,27 @@ $milliseconds = round(microtime(true) * 1000);
 $sql = "insert into reserva values ($id_doctor, '$fecha', '$hora', '$rut', '$dv', '$nombre', '$input_email', '$input_phone', $milliseconds)";
 if (!$result = mysqli_query($conexion, $sql)) {
     mysqli_query($conexion, "ROLLBACK");
-    $exito = array("resultado"=>"No se pudo grabar en reserva.");
+    $exito = array("resultado" => "No se pudo grabar en reserva.");
     echo json_encode($exito);
     die();
 }
 $sql = "update horas set tomada=2 where personalId='$id_doctor' and fecha='$fecha' and horaInicio='$hora'";
 if (!$result = mysqli_query($conexion, $sql)) {
     mysqli_query($conexion, "ROLLBACK");
-    $exito = array("resultado"=>"No se pudo actualizar la hora tomada.");
+    $exito = array("resultado" => "No se pudo actualizar la hora tomada.");
     echo json_encode($exito);
     die();
 }
 
 
 //create a random key
-$key = $nombre . $input_email . $hora . $id_doctor . $rut . date('mY');
+$key = date('mY') . $hora . $sede . $nombre . $input_email . $hora . $id_doctor . $rut;
 $key = md5($key);
 
-$sql = "insert into horas_por_confirmar values ( '$id_doctor','$fecha','$hora', '$key')";
+$sql = "insert into horas_por_confirmar values ( '$id_doctor','$fecha','$hora', '$key', $sede)";
 if (!$result = mysqli_query($conexion, $sql)) {
     mysqli_query($conexion, "ROLLBACK");
-    $exito = array("resultado"=>"No se pudo insertar en horas por confirmar.");
+    $exito = array("resultado" => "No se pudo insertar en horas por confirmar.");
     echo json_encode($exito);
     die();
 }
@@ -95,13 +95,13 @@ $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
 //mail('cursor.cl@gmail.com','TITULO','MENSAJE DE PRUEBA','From: cursor.cl@aplicacionestest.cl');
 
-if (mail($to,$subject,$txt,$headers)) { 
-    $exito = array("resultado"=>"exito");
-} else { 
+if (mail($to, $subject, $txt, $headers)) {
+    $exito = array("resultado" => "exito");
+} else {
     $errorMessage = error_get_last()['message'];
-    $exito = array("resultado"=>$errorMessage);
+    $exito = array("resultado" => $errorMessage);
 }
 
-$exito = array("resultado"=>"exito");
+$exito = array("resultado" => "exito");
 echo json_encode($exito);
 ?>

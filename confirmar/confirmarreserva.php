@@ -23,32 +23,44 @@
         <![endif]-->
     </head>
     <body>
-        <!-- header section -->
         <header class="top-header">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-2 header-logo">
+                    <div class="col-xs-12 header-logo">
                         <br>
                         <a href="index.html"><img src="../img/logo.png" alt="" class="img-responsive logo"></a>
                     </div>
-
                 </div>
             </div>
         </header>
-
-            
-        <form>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Confirmar hora</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">Conirmar la hora que ha solicitado.</small>
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="contact-caption clearfix">
+                        <div class="contact-heading text-center">
+                            <h2>Confirmado</h2>
+                        </div>
+                        <div class="col-md-12 contact-info text-center">
+                            <h3>Hora confirmada</h3>
+                            <div class="info-detail">
+                                <ul>
+                                    <li><i class="fa fa-user-circle"></i><span id="doctor"></span></li>
+                                </ul>
+                                <ul>
+                                    <li><i class="fa fa-calendar"></i><span id="dia"></span></li>
+                                </ul>
+                                <ul>
+                                    <li><i class="fa fa-times-circle"></i><span id="hora"></span></li>
+                                </ul>
+                                <ul>
+                                    <li><i class="fa fa-address-card"></i><span id="sede"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <?php
-            echo  "<input type='hidden' name='key' id='key'  value='".$_GET['key']."'/>";
-            ?>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>            
-
+        </section>
         <footer class="footer clearfix">
             <div class="container">
                 <div class="row">
@@ -63,15 +75,20 @@
                 </div>
             </div>
         </footer>
+
         <!-- script tags
         ============================================================= -->
         <script src="../js/jquery-2.1.1.js"></script>
         <script src="../js/jquery-ui.js"></script>
-        <!--<script src="js/smoothscroll.js"></script>-->
+        <script src="../js/gmaps.js"></script>
         <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/custom.js"></script>
+        <script src="../js/moment.min.js"></script>
+        <script src="../js/transition.js"></script>
+        <script src="confirmar.js"></script>
+        <script src="../js/rututil.js"></script>
+        <script src="../js/jquery.modal.min.js"></script>
 
-
-       
-        </script>
-    </body>
+    </script>
+</body>
 </html>

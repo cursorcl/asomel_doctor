@@ -14,12 +14,8 @@
 <link rel="stylesheet" href="css/search_rut.css">
 <link rel="stylesheet" href="css/zabuto_calendar.min.css">
 <link rel="stylesheet" href="css/jquery.modal.css">
-<link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300'
-	rel='stylesheet' type='text/css'>
-<link
-	href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700'
-	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300'	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
 <script src="js/modernizr.js"></script>
 <link rel="stylesheet" href="css/bootstrap-datepicker.css" />
 <!--[if lt IE 9]>
@@ -56,21 +52,21 @@
 		<?php include "footer.php"; ?>
 		<!-- script tags
 		============================================================= -->
-	<script src="js/jquery-2.1.1.js"></script>
-	<script src="js/jquery-ui.js"></script>
-	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="js/gmaps.js"></script>
-	<!--<script src="js/smoothscroll.js"></script>-->
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="js/moment.min.js"></script>
-	<script src="js/transition.js"></script>
-	<script src="js/dbAccess.js"></script>
-	<script src="js/rututil.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/jquery.modal.min.js"></script>
-	<script src="js/bootstrap-datepicker.es.min.js"></script>
-	<script src="js/zabuto_calendar.min.js"></script>
+                <script src="js/jquery-2.1.1.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+                <script src="js/gmaps.js"></script>
+                <!--<script src="js/smoothscroll.js"></script>-->
+                <script src="js/bootstrap.min.js"></script>
+                <script src="js/custom.js"></script>
+                <script src="js/moment.min.js"></script>
+                <script src="js/transition.js"></script>
+                <script src="js/dbAccess.js"></script>
+                <script src="js/rututil.js"></script>
+                <script src="js/bootstrap-datepicker.js"></script>
+                <script src="js/jquery.modal.min.js"></script>
+                <script src="js/bootstrap-datepicker.es.min.js"></script>
+                <script src="js/zabuto_calendar.min.js"></script>
 
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK0n8A2_jBF5xiLSMoUwnt-ZFHW11PjIQ&callback=initMap"></script>
