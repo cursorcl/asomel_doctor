@@ -76,6 +76,7 @@ function centerAt(source)
     map.setZoom(18);
 }
 
+// Obtierne listado de sedes.
 $().ready(function () {
 
     $.ajax({
@@ -127,6 +128,7 @@ $().ready(function () {
     });
 });
 
+// Evento de selección del radio button de Profesional-Especialidad
 $(document).ready(function () {
     $('input[type=radio][name=optradio]').change(function () {
         if (this.value === 'xdoctor') {
@@ -144,6 +146,7 @@ $(document).ready(function () {
     });
 });
 
+// Evento de cambio de sede.
 $(document).ready(function () {
     $("#cmbsedes").change(function (event) {
         var selected = $(this).val();
@@ -191,12 +194,12 @@ $(document).ready(function () {
     });
 });
 
+//Obtiene las horas de un doctor y una sede
 $(document).ready(function () {
     $("#btnsubmitdoctor").click(function (e) {
         e.preventDefault();
         var id_doctor = $('#cmbdoctor').val();
         var nombre_doctor = $('#cmbdoctor option:selected').text();
-
         var id_sede = $('#cmbsedes').val();
         var nombre_sede = $('#cmbsedes option:selected').text();
         var d = new Date();
@@ -205,7 +208,7 @@ $(document).ready(function () {
         $.ajax({
             type: "GET",
             url: "src/reserva/obtener_siguiente_hora_x_doctor_fecha_hora.php",
-            data: {"sede": id_sede, "id_doctor": id_doctor, "fecha": fecha, "hora": hora},
+            data: {"id_sede": id_sede, "id_doctor": id_doctor, "fecha": fecha, "hora": hora},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
@@ -222,14 +225,11 @@ $(document).ready(function () {
                 line = line + "<tbody>";
                 var hasdata = false;
                 $.each(msg, function (index, item) {
-                    var fechas = item.fecha.split("-");
-                    var fecha = fechas[2] + "-" + fechas[1] + "-" + fechas[0];
-                    var horas = item.horainicio.split(":");
-                    var hora = horas[0] + ":" + horas[1];
+                    
                     line = line + "<tr>";
-                    line = line + "<td class='td-name'>" + item.personalNombre + "</td>";
-                    line = line + "<td class='td-centered' >" + fecha + " <br>" + hora + "</td>";
-                    line = line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + item.personalId + "'>VER  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
+                    line = line + "<td class='td-name'>" + nombre_doctor + "</td>";
+                    line = line + "<td class='td-centered' >" + item["fecha"]+ "<br> " + item["hora"] + "</td>";
+                    line = line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + id_doctor + "'>VER  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
                     line = line + "</tr>";
                     hasdata = true;
                 });
@@ -248,7 +248,6 @@ $(document).ready(function () {
                 document.getElementById('reserva-presentadoctor').style.display = "none";
                 document.getElementById('reserva-calendariodoctor').style.display = "none";
                 document.getElementById('reserva-hora-paciente').style.display = "none";
-
                 $("#table-hours").on('click', '.hora', function () {
                     // Se va a mostrar las horas disponibles para el día seleccionado que sean mayores a la hora seleccionada.
                     var currentRow = $(this).closest("tr");
@@ -258,9 +257,7 @@ $(document).ready(function () {
                     var doc = currentRow.find("td:eq(0)").text();
                     var id = this.id;
                     var idSede = $('#cmbsedes').val();
-
                     mostrar_horas_doctor_dia(id, dia, hora, doc, idSede, nombre_sede);
-
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -269,9 +266,11 @@ $(document).ready(function () {
                 alert("!! " + xhr.responseText + " !!");
             }
         });
-    });
+    }
+    );
 });
 
+// Obtiene las horas de una sede y una especialidad.
 $(document).ready(function () {
     $("button").click(function () {
         e.preventDefault();
@@ -426,7 +425,7 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
         dataType: "json",
         success: function (msg) {
             $("#doctor-horas-libres").empty();
-            
+
             line = "<p> Horas disponibles para el día: " + fecha_dia;
             line = line + "<table class='table table-bordered table-condensed' id='table-hours-per-day'>";
             line = line + "<thead>";
@@ -437,13 +436,16 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
             line = line + "</thead>";
             line = line + "<tbody>";
             var exists = false;
-            $.each(msg, function (index, item) {
-                line = line + "<tr>";
-                line = line + "<td class='td-centered' >" + item.fecha + "</td>";
-                line = line + "<td class='td-centered'><button type='button' class='btn btn-primary btn-xs btn-block hora' id='" + item.personalId + "'>RESERVAR  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
-                line = line + "</tr>";
-                exists = true;
-            });
+            
+                $.each(msg, function (index, item) {
+                    
+                    line = line + "<tr>";
+                    line = line + "<td class='td-centered' >" + item["fecha"]+ "<br> " + item["hora"] + "</td>";
+                    line = line + "<td class='td-centered'><button type='button' class='btn btn-primary btn-xs btn-block hora' id='" + id_doctor + "'>RESERVAR  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
+                    line = line + "</tr>";
+                    exists = true;
+                });           
+            
             if (exists === false)
             {
                 line = line + "<tr>";
@@ -664,21 +666,21 @@ $().ready(function () {
 
 });
 
-$('#contact-form').on('submit', function(event){
-   e.preventDefault();
-  var name = $("#contact-name").val(); 
-  var email = $("#contact-email").val();
-  var phone = $("#contact-phone").val();
-  var text = $("#contact-text").val();
-  var message = $("#contact-message").val();
-  $.ajax({
-    type:'POST',
-    data: {"name": name, "email": email, "phone": phone, "text": text, "message": message },
-    url:'src/send_email.php',
-    success:function(data) {
-      //alert(data);
-    }
-  });
+$('#contact-form').on('submit', function (event) {
+    e.preventDefault();
+    var name = $("#contact-name").val();
+    var email = $("#contact-email").val();
+    var phone = $("#contact-phone").val();
+    var text = $("#contact-text").val();
+    var message = $("#contact-message").val();
+    $.ajax({
+        type: 'POST',
+        data: {"name": name, "email": email, "phone": phone, "text": text, "message": message},
+        url: 'src/send_email.php',
+        success: function (data) {
+            //alert(data);
+        }
+    });
 });
 
 $().ready(function () {
@@ -693,7 +695,7 @@ $().ready(function () {
         var tmpRut = $("#input_rut").val();
         var email = $("#input_email").val();
         var input_phone = $("#input_phone").val();
-        
+
         if ($('#solicita_datos_paciente').css('display') !== 'none')
         {
             // atributos que solo están visibles cuando el rut no es cliente.
@@ -717,7 +719,7 @@ $().ready(function () {
                 dataType: "json",
                 success: function (msg) {
                     //Aqui debo verificar que fue almacenado exitosamente o fallidamente
-                    
+
                     if (msg["resultado"] === "exito")
                     {
                         show_simple_modal("success", "Reserva de hora", "Su hora ha sido reservada exitosamente.", function (result) {

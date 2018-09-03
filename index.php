@@ -39,6 +39,9 @@
 	<!-- team section -->
 		<?php include "team.php"; ?>  
 		<!-- end of team section -->
+	<!-- other team section -->
+		<?php include "otherteam.php"; ?>  
+		<!-- end of otherteam section -->
 	<!-- contact section starts here -->
 		<?php include "contact.php"; ?> 
 		<!-- end of contact section -->
@@ -62,6 +65,7 @@
                 <script src="js/moment.min.js"></script>
                 <script src="js/transition.js"></script>
                 <script src="js/dbAccess.js"></script>
+                <script src="js/HoursAsomel.js"></script>
                 <script src="js/rututil.js"></script>
                 <script src="js/bootstrap-datepicker.js"></script>
                 <script src="js/jquery.modal.min.js"></script>

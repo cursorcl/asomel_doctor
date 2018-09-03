@@ -54,6 +54,11 @@
   /** SMTP_IP, Ip de servidor SMTP  */
   define('SMTP_IP', 'localhost');
   
+  /** NUMERO de días a presentar */
+  define('NRO_DAYS', 15);
+  /** DURACION de la hora de atención de un doctor */
+  define('STEP_MINUTES', 15);
   date_default_timezone_set('America/Santiago')
+  
 
 ?>
