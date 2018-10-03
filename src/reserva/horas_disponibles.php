@@ -80,7 +80,6 @@ function gethours($idate, $ldate, $stepminutes, $hoursused) {
 
 // date("Y-m-d H:i:s"); es el formato de MYSQL
 function hours($date, $id_doctor, $id_sede, $nrodays, $stepminutes) {
-
     $hbase = gethoursbase($id_doctor, $id_sede);
     $hused = gethoursused($date, $id_doctor, $id_sede);
     $dates = array();

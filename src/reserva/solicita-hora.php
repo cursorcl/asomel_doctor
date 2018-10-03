@@ -102,6 +102,7 @@
                 <input type="hidden"  name="fecha" id="fecha" />
                 <input type="hidden"  name="hora" id="hora" />
                 <input type="hidden"  name="id_doctor" id="id_doctor" />
+                <input type="hidden"  name="id_sede" id="id_sede" />
 
 
             </div>

@@ -2,6 +2,7 @@
 
 // Obtiene horarios de los doctores que son de una especialidad específica  en una sede en partícular
 include_once(dirname(__FILE__) . '/../global.php');
+include_once(dirname(__FILE__) . '/horas_disponibles.php');
 
 $fecha = date("Y-m-d");
 if (isset($_GET["fecha"])) {
@@ -9,9 +10,9 @@ if (isset($_GET["fecha"])) {
 }
 
 
-$idPersona = 1;
+$id_doctor = 1;
 if (isset($_GET["id_doctor"])) {
-    $idPersona = utf8_encode($_GET["id_doctor"]);
+    $id_doctor = utf8_encode($_GET["id_doctor"]);
 }
 
 $hora = date("H:i:s");
@@ -19,29 +20,19 @@ if (isset($_GET["hora"])) {
     $hora = utf8_encode($_GET["hora"]);
 }
 
-$idSede = date("Y-m-d");
+$id_sede = 1;
 if (isset($_GET["id_sede"])) {
-    $idSede = utf8_encode($_GET["id_sede"]);
+    $id_sede = utf8_encode($_GET["id_sede"]);
 }
 
-$sql = "SELECT * FROM view_listado_horas_libres WHERE personalId= " . $idPersona . " and sedeId = " . $idSede . "  and timestamp(fecha, horainicio) >= timestamp('" . $fecha . "', '" . $hora . "')  order by timestamp(fecha, horainicio) asc";
-
-$conexion = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
-mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
-
-
-if (!$result = mysqli_query($conexion, $sql))
-    die();
-
-$rawdata = array(); //creamos un array
-
-$i = 0;
-while ($row = mysqli_fetch_array($result)) {
-    $rawdata[$i] = $row;
-    $i++;
+$date = DateTime::createFromFormat("d/m/Y H:i:s", $fecha . " " . $hora);
+$rawdata = getAllHours($date, $id_doctor, $id_sede);
+$result = array();
+for ($n = 0; $n < sizeof($rawdata); $n++) {
+    $all = DateTime::createFromFormat("Y-m-d H:i:s", $rawdata[$n]);
+    $time = $all->format("H:i:s");
+    $date = $all->format("d-m-Y");
+    array_push($result, array(0 => $rawdata, "all" => $rawdata, 1 => $time, "hora" => $time, 2 => $date, "fecha" => $date));
 }
-$close = mysqli_close($conexion);
-
-
-echo json_encode($rawdata);
+echo json_encode($result);
 ?>

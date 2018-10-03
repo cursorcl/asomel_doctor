@@ -335,7 +335,9 @@ $(document).ready(function () {
                     var doc = currentRow.find("td:eq(0)").text();
                     var id = this.id;
                     var idSede = $('#cmbsedesespecialidad').val();
-
+                    
+                    $("#id_sede").val(idSede);
+                    $("#id_doctor").val(id);
                     mostrar_horas_doctor_dia(id, dia, hora, doc, idSede, nombre_sede);
 
                 });
@@ -417,6 +419,9 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
 {
     var pFechas = fecha_dia.split("-");
     var nFecha = pFechas[2] + "-" + pFechas[1] + "-" + pFechas[0];
+    $("#id_sede").val(id_sede);
+    $("#id_doctor").val(id_doctor);
+    $("#hora").val(hora);
     $.ajax({
         type: "GET",
         url: "src/reserva/obtener_horaslibres_doctor_sede_fecha.php",
@@ -424,56 +429,24 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            $("#doctor-horas-libres").empty();
-
-            line = "<p> Horas disponibles para el día: " + fecha_dia;
-            line = line + "<table class='table table-bordered table-condensed' id='table-hours-per-day'>";
-            line = line + "<thead>";
-            line = line + "<tr>";
-            line = line + "<th>Hora Inicio</th>";
-            line = line + "<th>Reservar</th>";
-            line = line + "</tr>";
-            line = line + "</thead>";
-            line = line + "<tbody>";
+            $("#diahora").empty();
+            $("#diahora").append(fecha_dia);
             var exists = false;
+            $("#cmbhoras").empty();
             
-                $.each(msg, function (index, item) {
-                    
-                    line = line + "<tr>";
-                    line = line + "<td class='td-centered' >" + item["fecha"]+ "<br> " + item["hora"] + "</td>";
-                    line = line + "<td class='td-centered'><button type='button' class='btn btn-primary btn-xs btn-block hora' id='" + id_doctor + "'>RESERVAR  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
-                    line = line + "</tr>";
-                    exists = true;
-                });           
-            
+            $.each(msg, function (index, item) {
+                $("#cmbhoras").append("<option value='" + item["fecha"]+ " " + item["hora"]  +"'>" + item["hora"] + "</option>" );
+                if( exists ===  false)
+                {
+                    $("#hora").val(item["hora"]);
+                }
+                exists = true;
+            });           
             if (exists === false)
             {
-                line = line + "<tr>";
-                line = line + "<td class='td-centered' colspan='2'> No hay horas disponibles para la fecha indicada</td>";
-                line = line + "</tr>";
+                $("#cmbhoras").empty();
+                $("#cmbhoras").append("<option>No hay horas disponibles...</option>" )
             }
-            line = line + "</tbody>";
-            line = line + "</table>";
-            line = line + "<input type='hidden' id='id_sede' name='id_sede' value='" + id_sede + "'>";
-            line = line + "<input type='hidden' id='id_doctor' name='id_doctor' value='" + id_doctor + "'>";
-            line = line + "<input type='hidden' id='fecha' name='fecha' value='" + nFecha + "'>";
-            line = line + "<input type='hidden' id='hora' name='hora' value='" + hora + "'>";
-
-            $("#doctor-horas-libres").append(line);
-
-            $("#table-hours-per-day").on('click', '.hora', function () {
-                // Se va a mostrar las horas disponibles para el día seleccionado que sean mayores a la hora seleccionada.
-
-                document.getElementById('reserva-form-doctor').style.display = "none";
-                document.getElementById('reserva-form-especialidad').style.display = "none";
-                document.getElementById('div-reserva-listadodoctores').style.display = "none";
-                document.getElementById('reserva-presentadoctor').style.display = "none";
-                document.getElementById('reserva-calendariodoctor').style.display = "none";
-                document.getElementById('reserva-hora-paciente').style.display = "block";
-
-                $('#hora-de-reserva').empty();
-                $('#hora-de-reserva').append("Día: " + fecha_dia + " a las " + hora);
-            });
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
@@ -483,6 +456,24 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
     });
 }
 
+//Ejecuta clic =  antiguo clic de tabla
+$(document).ready(function () {
+    $("#btnreservar").click(function (e) {
+        document.getElementById('reserva-form-doctor').style.display = "none";
+        document.getElementById('reserva-form-especialidad').style.display = "none";
+        document.getElementById('div-reserva-listadodoctores').style.display = "none";
+        document.getElementById('reserva-presentadoctor').style.display = "none";
+        document.getElementById('reserva-calendariodoctor').style.display = "none";
+        document.getElementById('reserva-hora-paciente').style.display = "block";
+
+        $('#hora-de-reserva').empty();
+        $('#hora-de-reserva').append("Día: " +  $("#diahora").text() + " a las " + $("#cmbhoras").find('option:selected').text());        
+    });
+    
+    $("#cmbhoras").change(function () {
+        $("#hora").val($("#cmbhoras").find('option:selected').text());
+    });
+});
 
 $(document).ready(function () {
     $("#cmbespecialidad").change(function (event) {
@@ -559,6 +550,7 @@ $(document).ready(function () {
 
                 var eventData = [];
                 $.each(msg, function (index, item) {
+                    
                     var s = {"date": item.fecha, "badge": true, "title": ""};
                     eventData.push(s);
                 });
