@@ -527,10 +527,6 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $(document).ready(function () {
-        $("#my-calendar").zabuto_calendar({language: "en"});
-    });
-
     $("#show_calendar").click(function (event) {
 
         var id_sede = $("#id_sede").val();
@@ -547,34 +543,31 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
-
                 var eventData = [];
                 $.each(msg, function (index, item) {
-                    
-                    var s = {"date": item.fecha, "badge": true, "title": ""};
+                    var f = new moment(item.fecha, "DD-MM-YYYY").format("YYYY-MM-DD");
+                    var s = {"date": f, "badge": true, "title": ""};
                     eventData.push(s);
                 });
                 var now = new Date();
                 var year = now.getFullYear();
                 var month = now.getMonth() + 1;
+                var month2show = now.getDate() > 15 ? 1:0;
+                
                 $("#modal-body-calendar").empty();
                 $("#modal-body-calendar").append("<div id='my-calendar'></div>");
                 $("#my-calendar").zabuto_calendar({
-                    language: 'es',
-                    cell_border: true,
+                    language: "es",
+                    year: year,
+                    month: month,
+                    show_previous: false,
+                    show_next: month2show,
                     today: true,
-                    show_days: false,
-                    weekstartson: 0,
+                    show_days: true,
                     data: eventData,
-                    show_previus: false,
-                    show_next: 6,
                     action: function () {
                         return myDateFunction(this.id, id_doctor, nombre_doctor, id_sede, nombre_sede);
-                    },
-//                    nav_icon: {
-//                        prev: '<i class="fa fa-chevron-circle-left"></i>',
-//                        next: '<i class="fa fa-chevron-circle-right"></i>'
-//                    }
+                    }
                 });
                 $('#myModal').modal('show');
             },
