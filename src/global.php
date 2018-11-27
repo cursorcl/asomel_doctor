@@ -58,7 +58,12 @@
   define('NRO_DAYS', 15);
   /** DURACION de la hora de atención de un doctor */
   define('STEP_MINUTES', 15);
-  date_default_timezone_set('America/Santiago')
+  
+  define('ESTADO_HORA_RESERVADA', 0);
+  define('ESTADO_HORA_CONFIRMADA', 1);
+  date_default_timezone_set('America/Santiago');
+  
+  
   
 
 ?>

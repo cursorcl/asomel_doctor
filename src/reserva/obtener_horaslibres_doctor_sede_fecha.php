@@ -22,7 +22,10 @@ $id_sede = 1;
 if (isset($_GET["idSede"])) {
     $id_sede = utf8_encode($_GET["idSede"]);
 }
-
+if(strlen($hora) < 6)
+{
+    $hora = $hora.":00";
+}
 $date = DateTime::createFromFormat("Y-m-d H:i:s", $fecha . " " . $hora);
 $rawdata = getHoursOfDay($date, $id_doctor, $id_sede);
 $result = array();

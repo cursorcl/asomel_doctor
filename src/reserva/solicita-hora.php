@@ -99,7 +99,7 @@
             <div> <!-- contiene solo campos ocultos utiles para el formulario y procesamiento
                   los valores ocultos son la fecha, la hora, el doctor
                 -->
-                <input type="hidden"  name="fecha" id="fecha" />
+                <input type="hidden"  name="fecha" id="lafecha" />
                 <input type="hidden"  name="hora" id="hora" />
                 <input type="hidden"  name="id_doctor" id="id_doctor" />
                 <input type="hidden"  name="id_sede" id="id_sede" />

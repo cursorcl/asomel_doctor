@@ -11,7 +11,7 @@ include_once(dirname(__FILE__) . '/../global.php');
 
 
 // estos son los datos mínimos para establecer un registro.
-if (!isset($_GET["fecha"]) || !isset($_GET["hora"]) || !isset($_GET["id_doctor"]) || !isset($_GET["input_rut"]) || !isset($_GET["input_email"])) {
+if (!isset($_GET["fecha"]) || !isset($_GET["hora"]) || !isset($_GET["id_doctor"]) || !isset($_GET["input_rut"]) || !isset($_GET["input_email"]) || !isset($_GET["id_sede"])) {
     die();
 }
 
@@ -20,6 +20,7 @@ $hora = utf8_encode($_GET["hora"]);
 $id_doctor = utf8_encode($_GET["id_doctor"]);
 $input_rut = utf8_encode($_GET["input_rut"]);
 $input_email = utf8_encode($_GET["input_email"]);
+$sede = utf8_encode($_GET["id_sede"]);
 
 $dv = substr($input_rut, -1);
 $rut = substr($input_rut, 0, -1);
@@ -51,35 +52,18 @@ if (!isset($_GET["input_paterno"]) || !isset($_GET["input_materno"]) || !isset($
     $input_phone = utf8_encode($_GET["input_phone"]);
 }
 
+//create a random key
+$key = date('mY') . $hora . $sede . $nombre . $input_email . $hora . $id_doctor . $rut;
+$key = md5($key);
 
 $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
 mysqli_query($conexion, "START TRANSACTION");
 $milliseconds = round(microtime(true) * 1000);
-$sql = "insert into reserva values ($id_doctor, '$fecha', '$hora', '$rut', '$dv', '$nombre', '$input_email', '$input_phone', $milliseconds)";
+$sql = "insert into reserva values ($id_doctor, '$fecha', '$hora', '$rut', '$dv', '$nombre', '$input_email', '$input_phone', $milliseconds, $sede," . ESTADO_HORA_RESERVADA.   ", '$key')";
 if (!$result = mysqli_query($conexion, $sql)) {
     mysqli_query($conexion, "ROLLBACK");
     $exito = array("resultado" => "No se pudo grabar en reserva.");
-    echo json_encode($exito);
-    die();
-}
-$sql = "update horas set tomada=2 where personalId='$id_doctor' and fecha='$fecha' and horaInicio='$hora'";
-if (!$result = mysqli_query($conexion, $sql)) {
-    mysqli_query($conexion, "ROLLBACK");
-    $exito = array("resultado" => "No se pudo actualizar la hora tomada.");
-    echo json_encode($exito);
-    die();
-}
-
-
-//create a random key
-$key = date('mY') . $hora . $sede . $nombre . $input_email . $hora . $id_doctor . $rut;
-$key = md5($key);
-
-$sql = "insert into horas_por_confirmar values ( '$id_doctor','$fecha','$hora', '$key', $sede)";
-if (!$result = mysqli_query($conexion, $sql)) {
-    mysqli_query($conexion, "ROLLBACK");
-    $exito = array("resultado" => "No se pudo insertar en horas por confirmar.");
     echo json_encode($exito);
     die();
 }
@@ -88,8 +72,8 @@ mysqli_query($conexion, "COMMIT");
 $close = mysqli_close($conexion);
 $to = $input_email;
 $subject = "[ASOMEL]Confirmación de hora";
-$txt = "<a href='http://localhost/doctor/confirmar/confirmarreserva.php?key=$key'><p><strong>Confirmar la hora para el $fecha a las $hora</strong></p></a>";
-$headers = "From: cursor.cl@aplicacionestest.cl\r\n";
+$txt = "<a href='http://localhost/confirmacion/index.php?key=$key'><p><strong>Confirmar la hora para el $fecha a las $hora</strong></p></a>";
+$headers = "From: cursor.cl@gmail.cl\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
@@ -98,10 +82,9 @@ $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 if (mail($to, $subject, $txt, $headers)) {
     $exito = array("resultado" => "exito");
 } else {
-    $errorMessage = error_get_last()['message'];
+    $errorMessage = error_get_last();
     $exito = array("resultado" => $errorMessage);
 }
 
-$exito = array("resultado" => "exito");
 echo json_encode($exito);
 ?>

@@ -25,7 +25,7 @@ if (isset($_GET["id_sede"])) {
     $id_sede = utf8_encode($_GET["id_sede"]);
 }
 
-$date = DateTime::createFromFormat("d/m/Y H:i:s", $fecha . " " . $hora);
+$date = DateTime::createFromFormat("d-m-Y H:i:s", $fecha . " " . $hora);
 $rawdata = getAllHours($date, $id_doctor, $id_sede);
 $result = array();
 for ($n = 0; $n < sizeof($rawdata); $n++) {

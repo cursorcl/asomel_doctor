@@ -37,7 +37,7 @@ function gethoursused($date, $id_doctor, $id_sede) {
     $ltime->modify("+" . NRO_DAYS . " day");
     $idate = $itime->format("Y-m-d");
     $ldate = $ltime->format("Y-m-d");
-    $sql = "SELECT * FROM asomel_data.horas where personalId = $id_doctor and sedeId = $id_sede and fecha >= '$idate' and fecha <= '$ldate'";
+    $sql = "SELECT * FROM asomel_data.reserva where personalId = $id_doctor and sedeId = $id_sede and fecha >= '$idate' and fecha <= '$ldate'";
     $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PWD, DB_NAME);
     mysqli_set_charset($conexion, "utf8");
     if (!$result = mysqli_query($conexion, $sql))
@@ -45,7 +45,8 @@ function gethoursused($date, $id_doctor, $id_sede) {
     $rawdata = array();
     $i = 0;
     while ($row = mysqli_fetch_assoc($result)) {
-        $rawdata[$i] = $row;
+        $fecha = $row['fecha'] . " " . $row['horaInicio'];
+        $rawdata[$i] =DateTime::createFromFormat('Y-m-d H:i:s', $fecha);
         $i++;
     }
     mysqli_close($conexion);
@@ -63,14 +64,15 @@ function gethours($idate, $ldate, $stepminutes, $hoursused) {
     $hours = array();
     $time = new DateTime($idate->format('Y-m-d H:i:s'));
     while ($time < $ldate) {
-        $notfounded = true;
+        $founded = false;
         for ($m = 0; $m < sizeof($hoursused); $m++) {
-            if ($hoursused[$m] === $time) {
-                $notfounded = false;
+            $date = $hoursused[$m];
+            if ( $date == $time) {
+                $founded = true;
                 break;
             }
         }
-        if ($notfounded) {
+        if (!$founded) {
             array_push($hours, $time->format('Y-m-d H:i:s'));
         }
         $time->modify("+{$stepminutes} minutes");

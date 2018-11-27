@@ -305,10 +305,8 @@ $(document).ready(function () {
                 $line = $line + "</thead>";
                 $line = $line + "<tbody>";
                 $.each(msg, function (index, item) {
-                    var fechas = item.fecha.split("-");
-                    var fecha = fechas[2] + "-" + fechas[1] + "-" + fechas[0];
-                    var horas = item.horainicio.split(":");
-                    var hora = horas[0] + ":" + horas[1];
+                    var fecha = item.fecha;
+                    var hora = item.hora.substring(0,5);
                     var id = item.personalId + "." + fecha + "." + hora;
                     $line = $line + "<tr>";
                     $line = $line + "<td class='td-name'>" + item.personalNombre + "</td>";
@@ -338,6 +336,7 @@ $(document).ready(function () {
                     
                     $("#id_sede").val(idSede);
                     $("#id_doctor").val(id);
+                    $("#lafecha").val(dia);
                     mostrar_horas_doctor_dia(id, dia, hora, doc, idSede, nombre_sede);
 
                 });
@@ -422,6 +421,7 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
     $("#id_sede").val(id_sede);
     $("#id_doctor").val(id_doctor);
     $("#hora").val(hora);
+    $("#lafecha").val(nFecha);
     $.ajax({
         type: "GET",
         url: "src/reserva/obtener_horaslibres_doctor_sede_fecha.php",
@@ -515,7 +515,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $("#fecha").change(function (event) {
+    $("#lafecha").change(function (event) {
 
         fecha = $(this).val();
         if (fecha && profesional)
@@ -531,7 +531,8 @@ $(document).ready(function () {
 
         var id_sede = $("#id_sede").val();
         var id_doctor = $("#id_doctor").val();
-        var fecha = $("#fecha").val();
+        var fecha = $("#lafecha").val();
+        fecha = new moment(fecha).format("DD-MM-YYYY");
         var hora = $("#hora").val();
         var nombre_doctor = $("#nombre_doctor").val();
         var nombre_sede = $("#nombre_sede").val();
@@ -592,6 +593,8 @@ function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
     {
         mostrar_horas_doctor_dia(id_doctor, nFecha, "00:00:00", nombre_doctor, id_sede, nombre_sede);
     }
+    
+    $('#myModal').modal('hide');
     return true;
 }
 
@@ -643,15 +646,12 @@ $().ready(function () {
                     alert("!! " + xhr.responseText + " !!");
                 }
             });
-
         }
-
     }
     );
-
 });
 
-$('#contact-form').on('submit', function (event) {
+$('#contact-form-reserva').on('submit', function (event) {
     e.preventDefault();
     var name = $("#contact-name").val();
     var email = $("#contact-email").val();
@@ -674,13 +674,13 @@ $().ready(function () {
         e.preventDefault();
         // campos ocultos
         var hora = $("#hora").val();
-        var fecha = $("#fecha").val();
+        var fecha = $("#lafecha").val();
         var id_doctor = $("#id_doctor").val();
         // atributos que siempre están visibles
         var tmpRut = $("#input_rut").val();
         var email = $("#input_email").val();
         var input_phone = $("#input_phone").val();
-
+        var id_sede = $("#id_sede").val();
         if ($('#solicita_datos_paciente').css('display') !== 'none')
         {
             // atributos que solo están visibles cuando el rut no es cliente.
@@ -695,7 +695,7 @@ $().ready(function () {
         if (validate(tmpRut))
         {
             var searchRut = clean(format(tmpRut));
-            parametros = {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor": id_doctor, "input_email": email, "input_phone": input_phone};
+            parametros = {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor": id_doctor, "input_email": email, "input_phone": input_phone, "id_sede":id_sede};
             $.ajax({
                 type: "GET",
                 url: "src/reserva/registrar_horas_para_paciente.php",

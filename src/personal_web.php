@@ -16,10 +16,16 @@ while ($row = mysqli_fetch_assoc($result)) {
     {
         echo "<div class='row'>"."\n";
     }
+    $image = "img/doctors/0.png";
+    if(file_exists("img/doctors/".$row['personalId'].".png"))
+    {
+        $image = "img/doctors/".$row['personalId'].".png";
+    }
     echo "<div class='col-md-2 single-member col-sm-4'>"."\n";
     if (($i % 2) == 0) {
+        
         echo "  <div class='person'>"."\n";
-        echo "      <img class='img-responsive' src='" . $row['fotografia'] . "' alt='" . $row['nombre'] . "'>"."\n";
+        echo "      <img class='img-responsive' src='" . $image . "' alt='" . $row['nombre'] . "'>"."\n";
         echo "  </div>"."\n";
         echo "  <div class='person-detail'>"."\n";
         echo "      <div class='arrow-bottom'></div>"."\n";
@@ -37,7 +43,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         echo "      <p>" . $row['resumen'] . "</p>"."\n";
         echo "  </div>"."\n";
         echo "  <div class='person'>"."\n";
-        echo "      <img class='img-responsive' src='" . $row['fotografia'] . "' alt='" . $row['nombre'] . "'>"."\n";
+        echo "      <img class='img-responsive' src='" .  $image . "' alt='" . $row['nombre'] . "'>"."\n";
         echo "  </div>"."\n";
     }
     echo "</div>"."\n";
