@@ -131,7 +131,7 @@
                 <h4 class="modal-title">Registro de hora</h4>
             </div>
             <div class="modal-body">
-                <p>La hora ha sido registrada con exito.</p>
+                <p>Se ha enviado correo de confirmación de hora.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

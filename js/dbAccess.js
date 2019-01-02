@@ -2,6 +2,10 @@
 var map;
 var panorama;
 var positions = [];
+var heading = [];
+var icons = ['http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'];
 var fecha;
 var profesional;
 
@@ -20,9 +24,13 @@ function initMap() {
             style: google.maps.ZoomControlStyle.LARGE,
             position: google.maps.ControlPosition.RIGHT_CENTER
         },
-        scaleControl: true,
+        scaleControl: true
     };
+
     map = new google.maps.Map(document.getElementById("map"), myOptions);
+    panorama = map.getStreetView();
+    //map.setStreetView(panorama);
+
 }
 
 $().ready(function () {
@@ -71,7 +79,11 @@ $().ready(function () {
 
 function centerAt(source)
 {
-    var index = parseInt(source) - 1;
+    var index = parseInt(source);
+//    var pov = panorama.getPov();
+//    pov.heading = heading[index];
+//    panorama.setPov(pov);
+//    panorama.setPosition({lat: positions[index].lat, lng: positions[index].lon});
     map.setCenter(positions[index]);
     map.setZoom(18);
 }
@@ -91,7 +103,7 @@ $().ready(function () {
             $("#cmbsedesespecialidad").get(0).options.length = 0;
             $("#cmbsedesespecialidad").get(0).options[0] = new Option("Seleccione Centro Médico...", "-1");
             var bounds = new google.maps.LatLngBounds();
-            panorama = map.getStreetView();
+
             $.each(msg, function (index, item) {
                 $("#cmbsedes").get(0).options[$("#cmbsedes").get(0).options.length] = new Option(item.sedeNombre, item.sedeId);
                 $("#cmbsedesespecialidad").get(0).options[$("#cmbsedesespecialidad").get(0).options.length] = new Option(item.sedeNombre, item.sedeId);
@@ -102,18 +114,16 @@ $().ready(function () {
 
                 var latLng = new google.maps.LatLng(item.lat, item.lon);
                 var marker = new google.maps.Marker({position: latLng, map: map, title: item.sedeNombre});
+                marker.setIcon(icons[item.sedeId - 1]);
                 marker.setMap(map);
-
-
-                positions.push(latLng);
+                positions[item.sedeId] = latLng;
+                heading[item.sedeId] = item.heading;
                 var infowindow = new google.maps.InfoWindow({
                     content: '<div>' + item.sedeNombre + '<br>' + item.sedeDireccion + '<p>' + item.sedeHorarioAtencion + '</p></div>'
                 });
-
                 marker.addListener('click', function () {
                     infowindow.open(marker.get('map'), marker);
                 });
-                map.setStreetView(panorama);
                 bounds.extend(marker.position);
             });
             map.fitBounds(bounds);
@@ -225,10 +235,10 @@ $(document).ready(function () {
                 line = line + "<tbody>";
                 var hasdata = false;
                 $.each(msg, function (index, item) {
-                    
+
                     line = line + "<tr>";
                     line = line + "<td class='td-name'>" + nombre_doctor + "</td>";
-                    line = line + "<td class='td-centered' >" + item["fecha"]+ "<br> " + item["hora"] + "</td>";
+                    line = line + "<td class='td-centered' >" + item["fecha"] + "<br> " + item["hora"] + "</td>";
                     line = line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + id_doctor + "'>VER  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
                     line = line + "</tr>";
                     hasdata = true;
@@ -306,7 +316,7 @@ $(document).ready(function () {
                 $line = $line + "<tbody>";
                 $.each(msg, function (index, item) {
                     var fecha = item.fecha;
-                    var hora = item.hora.substring(0,5);
+                    var hora = item.hora.substring(0, 5);
                     var id = item.personalId + "." + fecha + "." + hora;
                     $line = $line + "<tr>";
                     $line = $line + "<td class='td-name'>" + item.personalNombre + "</td>";
@@ -333,7 +343,7 @@ $(document).ready(function () {
                     var doc = currentRow.find("td:eq(0)").text();
                     var id = this.id;
                     var idSede = $('#cmbsedesespecialidad').val();
-                    
+
                     $("#id_sede").val(idSede);
                     $("#id_doctor").val(id);
                     $("#lafecha").val(dia);
@@ -433,19 +443,19 @@ function mostrar_horas_disponibles(id_doctor, fecha_dia, hora, id_sede)
             $("#diahora").append(fecha_dia);
             var exists = false;
             $("#cmbhoras").empty();
-            
+
             $.each(msg, function (index, item) {
-                $("#cmbhoras").append("<option value='" + item["fecha"]+ " " + item["hora"]  +"'>" + item["hora"] + "</option>" );
-                if( exists ===  false)
+                $("#cmbhoras").append("<option value='" + item["fecha"] + " " + item["hora"] + "'>" + item["hora"] + "</option>");
+                if (exists === false)
                 {
                     $("#hora").val(item["hora"]);
                 }
                 exists = true;
-            });           
+            });
             if (exists === false)
             {
                 $("#cmbhoras").empty();
-                $("#cmbhoras").append("<option>No hay horas disponibles...</option>" )
+                $("#cmbhoras").append("<option>No hay horas disponibles...</option>")
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -467,9 +477,9 @@ $(document).ready(function () {
         document.getElementById('reserva-hora-paciente').style.display = "block";
 
         $('#hora-de-reserva').empty();
-        $('#hora-de-reserva').append("Día: " +  $("#diahora").text() + " a las " + $("#cmbhoras").find('option:selected').text());        
+        $('#hora-de-reserva').append("Día: " + $("#diahora").text() + " a las " + $("#cmbhoras").find('option:selected').text());
     });
-    
+
     $("#cmbhoras").change(function () {
         $("#hora").val($("#cmbhoras").find('option:selected').text());
     });
@@ -553,8 +563,8 @@ $(document).ready(function () {
                 var now = new Date();
                 var year = now.getFullYear();
                 var month = now.getMonth() + 1;
-                var month2show = now.getDate() > 15 ? 1:0;
-                
+                var month2show = now.getDate() > 15 ? 1 : 0;
+
                 $("#modal-body-calendar").empty();
                 $("#modal-body-calendar").append("<div id='my-calendar'></div>");
                 $("#my-calendar").zabuto_calendar({
@@ -593,7 +603,7 @@ function myDateFunction(id, id_doctor, nombre_doctor, id_sede, nombre_sede) {
     {
         mostrar_horas_doctor_dia(id_doctor, nFecha, "00:00:00", nombre_doctor, id_sede, nombre_sede);
     }
-    
+
     $('#myModal').modal('hide');
     return true;
 }
@@ -673,6 +683,7 @@ $().ready(function () {
         // AQUI DEBO VALIDAR LOS DATOS
         e.preventDefault();
         // campos ocultos
+        var parametros = [];
         var hora = $("#hora").val();
         var fecha = $("#lafecha").val();
         var id_doctor = $("#id_doctor").val();
@@ -681,21 +692,28 @@ $().ready(function () {
         var email = $("#input_email").val();
         var input_phone = $("#input_phone").val();
         var id_sede = $("#id_sede").val();
+
+        var input_paterno = "";
+        var input_materno = "";
+        var input_nombres = "";
         if ($('#solicita_datos_paciente').css('display') !== 'none')
         {
             // atributos que solo están visibles cuando el rut no es cliente.
-            var input_paterno = $("#input_paterno").val();
-            var input_materno = $("#input_materno").val();
-            var input_nombres = $("#input_nombres").val();
-            parametros["input_paterno"] = input_paterno;
-            parametros["input_materno"] = input_materno;
-            parametros["input_nombres"] = input_nombres;
+            input_paterno = $("#input_paterno").val();
+            input_materno = $("#input_materno").val();
+            input_nombres = $("#input_nombres").val();
         }
 
         if (validate(tmpRut))
         {
             var searchRut = clean(format(tmpRut));
-            parametros = {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor": id_doctor, "input_email": email, "input_phone": input_phone, "id_sede":id_sede};
+            parametros = {"input_rut": searchRut, "fecha": fecha, "hora": hora, "id_doctor": id_doctor, "input_email": email, "input_phone": input_phone, "id_sede": id_sede};
+            if (input_paterno !== "")
+            {
+                parametros["input_paterno"] = input_paterno;
+                parametros["input_materno"] = input_materno;
+                parametros["input_nombres"] = input_nombres;
+            }
             $.ajax({
                 type: "GET",
                 url: "src/reserva/registrar_horas_para_paciente.php",
@@ -707,13 +725,13 @@ $().ready(function () {
 
                     if (msg["resultado"] === "exito")
                     {
-                        show_simple_modal("success", "Reserva de hora", "Su hora ha sido reservada exitosamente.", function (result) {
+                        show_simple_modal("success", "Reserva de hora", "Se ha enviado correo a " + email +  " para confirmar hora.", function (result) {
                             $("#reserva-form-usuario").submit();
                             return true;
                         });
                     } else
                     {
-                        show_simple_modal("error ", "Reserva de hora", "Su hora no ha sido reservada exitosamente.", function (result) {
+                        show_simple_modal("error ", "Reserva de hora", "No se ha podido reservar su hora.", function (result) {
                             $("#reserva-form-usuario").submit();
                             return true;
                         });

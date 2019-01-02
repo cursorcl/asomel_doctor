@@ -48,7 +48,7 @@ if (!isset($_GET["input_paterno"]) || !isset($_GET["input_materno"]) || !isset($
     $input_paterno = utf8_encode($_GET["input_paterno"]);
     $input_materno = utf8_encode($_GET["input_materno"]);
     $input_nombres = utf8_encode($_GET["input_nombres"]);
-    $nombre = $input_paterno . " " . $input_materno . " " . $input_nombres;
+    $nombre = strtoupper($input_paterno . " " . $input_materno . " " . $input_nombres);
     $input_phone = utf8_encode($_GET["input_phone"]);
 }
 
@@ -82,7 +82,7 @@ $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 if (mail($to, $subject, $txt, $headers)) {
     $exito = array("resultado" => "exito");
 } else {
-    $errorMessage = error_get_last();
+    $errorMessage = error_get_last()['message'];
     $exito = array("resultado" => $errorMessage);
 }
 
