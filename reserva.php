@@ -36,8 +36,9 @@
                         </div>
                         <div class="form-group">
                             <input class="submit-btn" type="submit" value="BUSCAR"
-                                   id="btnsubmitdoctor" disabled> <input class="submit-btn"
-                                   type="submit" value="INICIO">
+                                   id="btnsubmitdoctor" disabled/> 
+                            <input class="submit-btn"
+                                   type="submit" value="INICIO"/>
                         </div>
                     </form>
                 </div>
@@ -60,7 +61,8 @@
                         </div>
                         <div class="form-group">
                             <input class="submit-btn" type="submit" value="BUSCAR"
-                                   id="btnsubmitespecialidad" disabled> <input class="submit-btn"
+                                   id="btnsubmitespecialidad" disabled> 
+                            <input class="submit-btn"
                                    type="submit" value="INICIO">
                         </div>
                     </form>

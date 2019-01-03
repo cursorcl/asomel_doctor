@@ -89,7 +89,7 @@
                         <div class="col-md-10">                     
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input type="text" class="form-control" id="input_nombres"  name="input_nombres" placeholder="Nombre">
+                                <input type="text" class="form-control" id="input_nombres"  name="input_nombres" placeholder="Nombre" >
                             </div>
                         </div>
                     </div>
@@ -106,13 +106,13 @@
 
 
             </div>
-            <div class="row">
+            <div class="row reserva-form">
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <input class="reset-btn" type="reset" value="CANCELAR">
                     </div>
                     <div class="col-md-6">
-                        <input class="submit-btn" type="submit" id="submit_reserva_hora" value="CONFIRMAR">
+                        <input class="submit-btn" type="submit" id="submit_reserva_hora" value="CONFIRMAR" disabled>
                     </div>
 
 

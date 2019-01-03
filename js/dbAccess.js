@@ -224,33 +224,35 @@ $(document).ready(function () {
             success: function (msg) {
                 $("#reserva-listadodoctores").empty();
                 //Aqui debo agregar todos los doctores en el UL reserva-listadodoctores
-                line = "<table class='table table-bordered' id='table-hours'>";
-                line = line + "<thead >";
-                line = line + "<tr>";
-                line = line + "<th>Profesional</th>";
-                line = line + "<th>Siguiente Hora</th>";
-                line = line + "<th>Agenda</th>";
-                line = line + "</tr>";
-                line = line + "</thead>";
-                line = line + "<tbody>";
+                $line = "<p>NO SE HA ENCONRADO HORAS DISPONIBLES.</p>"
                 var hasdata = false;
                 $.each(msg, function (index, item) {
 
+                    if (hasdata === false)
+                    {
+                        hasdata = true;
+                        line = "<table class='table table-bordered' id='table-hours'>";
+                        line = line + "<thead >";
+                        line = line + "<tr>";
+                        line = line + "<th>Profesional</th>";
+                        line = line + "<th>Siguiente Hora</th>";
+                        line = line + "<th>Agenda</th>";
+                        line = line + "</tr>";
+                        line = line + "</thead>";
+                        line = line + "<tbody>";
+                    }
                     line = line + "<tr>";
                     line = line + "<td class='td-name'>" + nombre_doctor + "</td>";
                     line = line + "<td class='td-centered' >" + item["fecha"] + "<br> " + item["hora"] + "</td>";
                     line = line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + id_doctor + "'>VER  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
                     line = line + "</tr>";
-                    hasdata = true;
+
                 });
-                if (!hasdata)
+                if (hasdata === true)
                 {
-                    line = line + "<tr>";
-                    line = line + "<td class='td-name' colspan='3'>No hay horas disponibles </td>";
-                    line = line + "</tr>";
+                    line = line + "</tbody>";
+                    line = line + "</table>";
                 }
-                line = line + "</tbody>";
-                line = line + "</table>";
                 $("#reserva-listadodoctores").append(line);
                 document.getElementById('reserva-form-doctor').style.display = "none";
                 document.getElementById('reserva-form-especialidad').style.display = "none";
@@ -304,17 +306,23 @@ $(document).ready(function () {
             dataType: "json",
             success: function (msg) {
                 $("#reserva-listadodoctores").empty();
-                //Aqui debo agregar todos los doctores en el UL reserva-listadodoctores
-                $line = "<table class='table table-bordered' id='table-hours'>";
-                $line = $line + "<thead >";
-                $line = $line + "<tr>";
-                $line = $line + "<th>Profesional</th>";
-                $line = $line + "<th>Siguiente Hora</th>";
-                $line = $line + "<th>Agenda</th>";
-                $line = $line + "</tr>";
-                $line = $line + "</thead>";
-                $line = $line + "<tbody>";
+                var founded = false;
+                $line = "<p>NO SE HA ENCONTRADO HORAS DISPONIBLES.</p>";
                 $.each(msg, function (index, item) {
+                    if (founded === false)
+                    {
+                        founded = true;
+                        //Aqui debo agregar todos los doctores en el UL reserva-listadodoctores
+                        $line = "<table class='table table-bordered' id='table-hours'>";
+                        $line = $line + "<thead >";
+                        $line = $line + "<tr>";
+                        $line = $line + "<th>Profesional</th>";
+                        $line = $line + "<th>Siguiente Hora</th>";
+                        $line = $line + "<th>Agenda</th>";
+                        $line = $line + "</tr>";
+                        $line = $line + "</thead>";
+                        $line = $line + "<tbody>";
+                    }
                     var fecha = item.fecha;
                     var hora = item.hora.substring(0, 5);
                     var id = item.personalId + "." + fecha + "." + hora;
@@ -324,8 +332,11 @@ $(document).ready(function () {
                     $line = $line + "<td class='td-centered'><button type='button' class='btn btn-default hora' id='" + item.personalId + "'>VER  <span class='glyphicon glyphicon-calendar blue' aria-hidden='true'></span></button></td>";
                     $line = $line + "</tr>";
                 });
-                $line = $line + "</tbody>";
-                $line = $line + "</table>";
+                if (founded === true)
+                {
+                    $line = $line + "</tbody>";
+                    $line = $line + "</table>";
+                }
                 $("#reserva-listadodoctores").append($line);
                 document.getElementById('reserva-form-doctor').style.display = "none";
                 document.getElementById('reserva-form-especialidad').style.display = "none";
@@ -625,37 +636,69 @@ $().ready(function () {
         {
             $("#input_rut").val(format(tmpRut))
             var searchRut = clean(format(tmpRut));
+            var fecha = $("#lafecha").val();
+
             $.ajax({
                 type: "GET",
-                url: "src/reserva/obtener_paciente_x_rut.php",
-                data: {"rut": searchRut},
+                url: "src/reserva/validate_rut_only_one_hour.php",
+                data: {"rut": searchRut, "fecha": fecha},
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
-                    var founded = false;
-                    $.each(msg, function (index, item) {
-                        founded = true;
-                        $("#input_email").val(item.email);
-                        $("#input_phone").val(item.phone);
-                        $("#show_client_name").val(item.name);
-
-                    });
-                    if (!founded)
+                    
+                    if (msg['result'] === 0)
                     {
-                        document.getElementById('muestra_datos_paciente').style.display = "none";
-                        document.getElementById('solicita_datos_paciente').style.display = "block";
+                        $.ajax({
+                            type: "GET",
+                            url: "src/reserva/obtener_paciente_x_rut.php",
+                            data: {"rut": searchRut},
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (msg) {
+                                var founded = false;
+                                $.each(msg, function (index, item) {
+                                    founded = true;
+                                    $("#input_email").val(item.email);
+                                    $("#input_phone").val(item.phone);
+                                    $("#show_client_name").val(item.name);
+                                });
+                                if (!founded)
+                                {
+                                    document.getElementById('muestra_datos_paciente').style.display = "none";
+                                    document.getElementById('solicita_datos_paciente').style.display = "block";
 
-                    } else {
-                        document.getElementById('muestra_datos_paciente').style.display = "block";
-                        document.getElementById('solicita_datos_paciente').style.display = "none";
+                                } else {
+                                    document.getElementById('muestra_datos_paciente').style.display = "block";
+                                    document.getElementById('solicita_datos_paciente').style.display = "none";
+                                }
+                                
+                                $('#submit_reserva_hora').removeAttr('disabled');
+                                
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status);
+                                alert(thrownError);
+                                alert("!! " + xhr.responseText + " !!");
+                            }
+                        });
+                    } else
+                    {
+                        $('#submit_reserva_hora').attr('disabled', 'disabled');
+                        show_simple_modal("error", "Más de una reserva el día de hoy", function () {
+                            return "La persona indicada ya tiene reserva el día de hoy. Solo una reserva al día.";
+                        });
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
-                    alert("!! " + xhr.responseText + " !!");
+
                 }
             });
+
+
+
+
+
+
         }
     }
     );
@@ -725,7 +768,7 @@ $().ready(function () {
 
                     if (msg["resultado"] === "exito")
                     {
-                        show_simple_modal("success", "Reserva de hora", "Se ha enviado correo a " + email +  " para confirmar hora.", function (result) {
+                        show_simple_modal("success", "Reserva de hora", "Se ha enviado correo a " + email + " para confirmar hora.", function (result) {
                             $("#reserva-form-usuario").submit();
                             return true;
                         });
