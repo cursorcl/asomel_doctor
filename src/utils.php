@@ -31,7 +31,7 @@ function valiadte_rut($_rut) {
         $result = 11 - ($sum % 11);
     }
 
-    return "$result" === $dv || ($result === 10 && $dv === "K");
+     return "$result" === $dv || ($result === 10 && $dv === "K") || ($result == 11 && $dv === "0");
 }
 
 /**

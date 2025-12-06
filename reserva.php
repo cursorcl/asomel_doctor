@@ -69,13 +69,10 @@
                 </div>
                 <div class="col-md-5 col-md-offset-4 reserva-form"
                      style="display: none;" id="div-reserva-listadodoctores">
-                    <!-- 
-        Aquí se llena la lista de doctores con su primera hora disponible 
-        Cada línea tiene un botón submit para que llame al div de presentación doctor
-                    -->
+                    <!-- Aquí se llena la lista de doctores con su primera hora disponible 
+        Cada línea tiene un botón submit para que llame al div de presentación doctor        -->
                     <div class="list-group" id="reserva-listadodoctores"></div>
-                    <!--<ul class="list-group" id="reserva-listadodoctores">
-</ul>-->
+                    <!--<ul class="list-group" id="reserva-listadodoctores"></ul>-->
                 </div>
                 <div class="col-md-12 reserva-form" style="display: none;"
                      id="reserva-presentadoctor">
@@ -89,8 +86,7 @@
                         <div class="col-md-5">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img alt="" src="" class="img-doctor img-responsive"
-                                         id="img_doctor" />
+                                    <img alt="" src="" class="img-doctor img-responsive" id="img_doctor" />
                                 </div>
                                 <div class="col-md-9">
                                     <ul class="list-group reserva-lbl-info" id="doctor-info">

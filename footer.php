@@ -11,4 +11,6 @@
 					</div>
 				</div>
 			</div>
+			<a href="http://ficha.asomel.cl/#/reservarhoraext" target="_blank" class="btn btn-primary boton-flotante d-flex justify-content-center align-items-center">
+			RESERVAR HORA</a>
 		</footer>

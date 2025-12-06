@@ -11,10 +11,10 @@
                     </div>
                     <div class="about-details">
                         <div class="pentagon-text">
-                            <h1>C</h1>
+                            <h1>A</h1>
                         </div>
-                        <h3>Especialistas en Niños</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        <h3>Especialistas en Traumatología Adultos y Niños</h3>
+                        <p>Atención seguros de accidente, deportivo para colegios, universidades e instituciones de educación superior.<br><br><br></p>
                     </div>
                 </div>
             </div>
@@ -25,10 +25,10 @@
                     </div>
                     <div class="about-details">
                         <div class="pentagon-text">
-                            <h1>W</h1>
+                            <h1>D</h1>
                         </div>
-                        <h3>Especialistas Deportivos</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        <h3>Especialistas en Medicina del Deporte</h3>
+                        <p>Atención medica precompetitiva escolares, evaluación medica ortopedica, atención completa en lesiones deportivas y rehabilitación fisica por kinesiologos con equipamiento completo y amplio manejo profesional.</p>
                     </div>
                 </div>
             </div>
@@ -39,13 +39,14 @@
                     </div>
                     <div class="about-details">
                         <div class="pentagon-text">
-                            <h1>M</h1>
+                            <h1>T</h1>
                         </div>
-                        <h3>Especialistas Tercera Edad</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer.</p>
+                        <h3>Especialistas en Traumatología y Ortopedia para la Tercera Edad</h3>
+                        <p>Nuestro team de salud, médicos, kinesiologo, técnicos para médicos y todo el personal preparado especialmente , se esmera en brindar la mejor atención que necesitan los adultos mayores.<br><br></p>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </section>

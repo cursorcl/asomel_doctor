@@ -3,9 +3,9 @@ var map;
 var panorama;
 var positions = [];
 var heading = [];
-var icons = ['http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-    'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'];
+var icons = ['https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+    'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'];
 var fecha;
 var profesional;
 
@@ -28,11 +28,22 @@ function initMap() {
     };
 
     map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+
     panorama = map.getStreetView();
-    //map.setStreetView(panorama);
+    map.setStreetView(panorama);
+
+
+    window.onresize = function () {
+        var currCenter = map.getCenter();
+        google.maps.event.trigger(map, 'resize');
+        map.setCenter(currCenter);
+    };
 
 }
-
+$(document).ready(function() {
+    initMap(); // <--- Llamamos a la función manualmente
+});
 $().ready(function () {
     $.ajax({
         type: "POST",
@@ -41,6 +52,10 @@ $().ready(function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            if($("#cmbdoctor").get(0) == undefined)
+            {
+                return;
+            }
             $("#cmbdoctor").get(0).options.length = 0;
             $("#cmbdoctor").get(0).options[0] = new Option("Seleccione Especialista...", "-1");
 
@@ -61,6 +76,10 @@ $().ready(function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            if($("#cmbespecialidad").get(0) == undefined)
+            {
+                return;
+            }            
             $("#cmbespecialidad").get(0).options.length = 0;
             $("#cmbespecialidad").get(0).options[0] = new Option("Seleccione Especialidad...", "-1");
 
@@ -98,15 +117,17 @@ $().ready(function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
+            /*
             $("#cmbsedes").get(0).options.length = 0;
             $("#cmbsedes").get(0).options[0] = new Option("Seleccione Centro Médico...", "-1");
             $("#cmbsedesespecialidad").get(0).options.length = 0;
             $("#cmbsedesespecialidad").get(0).options[0] = new Option("Seleccione Centro Médico...", "-1");
+            */
             var bounds = new google.maps.LatLngBounds();
 
             $.each(msg, function (index, item) {
-                $("#cmbsedes").get(0).options[$("#cmbsedes").get(0).options.length] = new Option(item.sedeNombre, item.sedeId);
-                $("#cmbsedesespecialidad").get(0).options[$("#cmbsedesespecialidad").get(0).options.length] = new Option(item.sedeNombre, item.sedeId);
+                //$("#cmbsedes").get(0).options[$("#cmbsedes").get(0).options.length] = new Option(item.sedeNombre, item.sedeId);
+                //$("#cmbsedesespecialidad").get(0).options[$("#cmbsedesespecialidad").get(0).options.length] = new Option(item.sedeNombre, item.sedeId);
 
                 var title = "<div><em>" + item.sedeNombre + "</em><br>" + item.sedeDireccion + "<p>" + item.sedeHorarioAtencion + "</p></div>";
 
@@ -126,7 +147,8 @@ $().ready(function () {
                 });
                 bounds.extend(marker.position);
             });
-            map.fitBounds(bounds);
+            if (typeof map !== 'undefined' && map !== null)
+                map.fitBounds(bounds);
             $('[data-toggle="tooltip"]').tooltip();
 
         },
@@ -282,12 +304,21 @@ $(document).ready(function () {
     );
 });
 
+/*
+$(document).ready(function() {
+   $("#btn_personal_web_asociado").click(function (e) {
+       e.preventDefault();
+       $('#personal_web_asociado').toggle();
+   }); 
+   
+   $('#personal_web_asociado').click(function (e) {
+       e.preventDefault();
+       $('#personal_web_asociado').toggle();
+   }); 
+});
+*/
 // Obtiene las horas de una sede y una especialidad.
 $(document).ready(function () {
-    $("button").click(function () {
-        e.preventDefault();
-        alert(this.id);
-    });
     $("#btnsubmitespecialidad").click(function (e) {
         e.preventDefault();
         var especialidad = $('#cmbespecialidad').val();
@@ -634,6 +665,7 @@ $().ready(function () {
         var tmpRut = $("#input_rut").val();
         if (validate(tmpRut))
         {
+            $("#input_rut").removeClass('has-error');
             $("#input_rut").val(format(tmpRut))
             var searchRut = clean(format(tmpRut));
             var fecha = $("#lafecha").val();
@@ -645,7 +677,7 @@ $().ready(function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
-                    
+
                     if (msg['result'] === 0)
                     {
                         $.ajax({
@@ -671,9 +703,9 @@ $().ready(function () {
                                     document.getElementById('muestra_datos_paciente').style.display = "block";
                                     document.getElementById('solicita_datos_paciente').style.display = "none";
                                 }
-                                
+
                                 $('#submit_reserva_hora').removeAttr('disabled');
-                                
+
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 alert(xhr.status);
@@ -690,7 +722,9 @@ $().ready(function () {
                     }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
-
+                    alert(xhr.status);
+                    alert(thrownError);
+                    alert("!! " + xhr.responseText + " !!");
                 }
             });
 
@@ -699,6 +733,12 @@ $().ready(function () {
 
 
 
+        }
+        else
+        {
+            $("#input_rut").addClass('has-error');
+            $("#input_rut").focus();
+            $("#input_rut").select();
         }
     }
     );
@@ -843,3 +883,28 @@ function show_simple_modal(type, title, text, callback)
 
 
 
+$(document).ready(function() {
+
+  $(".toggle-accordion").on("click", function() {
+    var accordionId = $(this).attr("accordion-id"),
+      numPanelOpen = $(accordionId + ' .collapse.in').length;
+    
+    $(this).toggleClass("active");
+
+    if (numPanelOpen == 0) {
+      openAllPanels(accordionId);
+    } else {
+      closeAllPanels(accordionId);
+    }
+  })
+
+  openAllPanels = function(aId) {
+    console.log("setAllPanelOpen");
+    $(aId + ' .panel-collapse:not(".in")').collapse('show');
+  }
+  closeAllPanels = function(aId) {
+    console.log("setAllPanelclose");
+    $(aId + ' .panel-collapse.in').collapse('hide');
+  }
+     
+});

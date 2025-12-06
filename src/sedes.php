@@ -13,8 +13,9 @@ $rawdata = array(); //creamos un array
 $i=0;
 while($row = mysqli_fetch_array($result))
 {
-	$rawdata[$i] = $row;
-	$i++;
+	    $rawdata[$i] = $row;
+	    $i++;
+
 }
 $close = mysqli_close($conexion);
 echo json_encode($rawdata);

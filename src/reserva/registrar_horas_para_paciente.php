@@ -70,19 +70,34 @@ if (!$result = mysqli_query($conexion, $sql)) {
 
 mysqli_query($conexion, "COMMIT");
 $close = mysqli_close($conexion);
+
+
 $to = $input_email;
-$subject = "[ASOMEL]Confirmación de hora";
-$txt = "<a href='http://localhost/confirmacion/index.php?key=$key'><p><strong>Confirmar la hora para el $fecha a las $hora</strong></p></a>";
-$headers = "From: cursor.cl@gmail.cl\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+$subject = "[ASOMEL]Confirmar hora";
+$txt = " 
+     <html>
+        <body>
+            <a href='http://www.asomel.cl/confirmacion/index.php?key=$key'>
+                <p>
+                    <strong>
+                        Confirmar la hora para el $fecha a las $hora
+                    </strong>
+                </p>
+            </a>
+        </body>
+    </html>";
+$headers = "From: ".EMAIL_FROM."\r\n";
+$headers .= "MIME-Version: 1.0". "\r\n";
+$headers .= "Content-type: text/html; charset=UTF-8". "\r\n";
+
+
 
 //mail('cursor.cl@gmail.com','TITULO','MENSAJE DE PRUEBA','From: cursor.cl@aplicacionestest.cl');
 
 if (mail($to, $subject, $txt, $headers)) {
     $exito = array("resultado" => "exito");
 } else {
-    $errorMessage = error_get_last()['message'];
+    $errorMessage = error_get_last();
     $exito = array("resultado" => $errorMessage);
 }
 

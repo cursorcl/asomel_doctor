@@ -25,8 +25,9 @@
                                 <li><a class="menu" href="#service">Servicios </a></li>
                                 <li><a class="menu" href="#team">Equipo</a></li>
                                 <li><a class="menu" href="#contact"> Contáctenos</a></li>
+                                <li><a class="menu" href="#horarios"> Horarios</a></li>
                                 <li><a class="menu" href="#section-map"> Ubicación</a></li>
-                                <li><a class="menu" href="#reserva"> Reservas</a></li>
+                                <li><a class="menu" href="http://ficha.asomel.cl/#/reservarhoraext" target="_blank"> Reservar</a></li>
                             </ul>
                         </div>
                         <!-- /navbar-collapse -->

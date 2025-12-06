@@ -6,33 +6,33 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner" role="listbox">
 							<div class="item active">
-								<img src="img/slide-one.jpg" alt="">
+								<img src="img/valpo_0.png" alt="">
 								<div class="carousel-caption">
-									<h1>Proveyendo</h1>
+									<h1>Valparaíso</h1>
 									<p>Servicios de alta calidad</p>
 									<button>Sepa más</button>
 								</div>
 							</div>
 							<div class="item">
-								<img src="img/slide-two.jpg" alt="">
+								<img src="img/valpo_1.png" alt="">
 								<div class="carousel-caption">
-									<h1>Proveyendo</h1>
+									<h1>Valparaíso</h1>
 									<p>Servicios de alta calidad</p>
 									<button>Sepa más</button>
 								</div>
 							</div>
 							<div class="item">
-								<img src="img/slide-three.jpg" alt="">
+								<img src="img/vinna_0.png" alt="">
 								<div class="carousel-caption">
-									<h1>Proveyendo</h1>
+									<h1>Viña del Mar</h1>
 									<p>Servicios de alta calidad</p>
 									<button>Sepa más</button>
 								</div>
 							</div>
 							<div class="item">
-								<img src="img/slide-four.jpg" alt="">
+								<img src="img/vinna_1.png" alt="">
 								<div class="carousel-caption">
-									<h1>Proveyendo</h1>
+									<h1>Viña del Mar</h1>
 									<p>Servicios de alta calidad</p>
 									<button>Sepa más</button>
 								</div>

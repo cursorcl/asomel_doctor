@@ -61,6 +61,7 @@
   
   define('ESTADO_HORA_RESERVADA', 0);
   define('ESTADO_HORA_CONFIRMADA', 1);
+  define('EMAIL_FROM', "contacto@asomel.cl");
   date_default_timezone_set('America/Santiago');
   
   

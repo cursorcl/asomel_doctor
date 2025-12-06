@@ -29,18 +29,16 @@ while ($row = mysqli_fetch_assoc($result)) {
         echo "  </div>"."\n";
         echo "  <div class='person-detail'>"."\n";
         echo "      <div class='arrow-bottom'></div>"."\n";
-        echo "      <h3>" . $row['prefijo'] . "</h3>"."\n";
-        echo "      <p>" . $row['actividad'] . "</p>"."\n";
-        echo "      <h3>". $row['nombre'] . "</h3>"."\n";
-        echo "      <p>" . $row['resumen'] . "</p>"."\n";
+        echo "      <p class='doctor-title'>". $row['nombre'] . "</p>"."\n";
+        echo "      <p>" . $row['prefijo']."-".$row['actividad'] . "</p>"."\n";
+        echo "      <p class='doctor-desc'>" . $row['resumen'] . "</p>"."\n";
         echo "  </div>"."\n";
     } else {
         echo "  <div class='person-detail'>"."\n";
         echo "      <div class='arrow-top'></div>"."\n";
-        echo "      <h3>" . $row['prefijo'] . "</h3>"."\n";
-        echo "      <p>" . $row['actividad'] . "</p>"."\n";
-        echo "      <h3>". $row['nombre'] . "</h3>"."\n";
-        echo "      <p>" . $row['resumen'] . "</p>"."\n";
+        echo "      <p class='doctor-title'>" . $row['nombre'] . "</p>"."\n";
+        echo "      <p>" . $row['prefijo']."-".$row['actividad'] . "</p>"."\n";
+        echo "      <p class='doctor-desc'>" . $row['resumen'] . "</p>"."\n";
         echo "  </div>"."\n";
         echo "  <div class='person'>"."\n";
         echo "      <img class='img-responsive' src='" .  $image . "' alt='" . $row['nombre'] . "'>"."\n";

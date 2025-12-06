@@ -199,7 +199,7 @@ li a.active {
 /*about area*/
 
 .about h2 {
-    font-size: 90px;
+    font-size: 70px;
     color: #42b3e5;
     margin-top: 50px;
 }
@@ -292,9 +292,10 @@ li a.active {
     background: url(../img/pattern.jpg);
     background-repeat: repeat-y;
     margin-top: 40px;
+    margin-left: 140px;
 }
 .service h2 {
-    font-size: 90px;
+    font-size: 70px;
     color: #fff;
     margin-top: 70px;
     margin-bottom: 0;
@@ -398,7 +399,7 @@ li a.active {
     padding-bottom: 60px;
 }
 .team h2 {
-    font-size: 90px;
+    font-size: 70px;
     color: #42b3e5;
     margin-top: 50px;
     margin-bottom: 0;
@@ -415,9 +416,11 @@ li a.active {
 }
 .person img {
     width: 100%;
+    height:200px;
 }
 .person-detail {
-    padding: 10px;
+    height: 200px;
+    padding: 5px;
     background: #3a9cc8;
     position: relative;
     transition: all .7s ease 0s;
@@ -426,42 +429,31 @@ li a.active {
     -o-transition: all .7s ease 0s;
     -ms-transition: all .7s ease 0s;
 }
+
 .arrow-top {
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #3ba0cc;;
+    background: transparent !important;
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #3ba0cc;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    bottom: -10px;
-    left: 46%;
-    transition: all .7s ease 0s;
-    -webkit-transition: all .7s ease 0s;
-    -moz-transition: all .7s ease 0s;
-    -o-transition: all .7s ease 0s;
-    -ms-transition: all .7s ease 0s;
+    bottom: -5px;
+    left:49%;
 }
 .arrow-bottom {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #3ba0cc;
+    background: transparent !important;
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #3ba0cc;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    top: -9px;
-    left: 46%;
-    transition: all .7s ease 0s;
-    -webkit-transition: all .7s ease 0s;
-    -moz-transition: all .7s ease 0s;
-    -o-transition: all .7s ease 0s;
-    -ms-transition: all .7s ease 0s;
+    top: -5px;
+    left:49%;
 }
+
+
 .person-detail h3 {
     font-size: 20px;
     color: #fff;
@@ -487,7 +479,7 @@ li a.active {
 }
 .contact-heading h2 {
     color: #fff;
-    font-size: 90px;
+    font-size: 70px;
 }
 .contact-info {
     padding-left: 40px;
@@ -498,7 +490,6 @@ li a.active {
     color: #fff;
     text-transform: uppercase;
     font-weight: bold;
-    border-bottom: 1px solid #13849c;
     padding-bottom: 12px;
     margin-bottom: 0;
 }
@@ -537,11 +528,15 @@ li a.active {
     color: #fff;
 }
 
+.panel-group {
+    margin-right: 30px;
+}
+
 .table-borderless > tbody > tr > td,
 .table-borderless > tbody > tr > th,
 .table-borderless > tfoot > tr > td,
 .table-borderless > tfoot > tr > th
- {
+{
     border: none;
     text-align: left;
 }
@@ -622,9 +617,9 @@ li a.active {
 
 
 .img-doctor{
-   padding:1px;
-   border:1px solid #ffffff;
-   background-color:#ff0;
+    padding:1px;
+    border:1px solid #ffffff;
+    background-color:#ff0;
 }
 /*gmap*/
 
@@ -646,7 +641,7 @@ li a.active {
 .contact {
     /*position: absolute;*/
     width: 100%;
-    height: 830px;
+    height: 750px;
     /*margin-top: 0px;*/
     left: 0;
 
@@ -657,6 +652,98 @@ li a.active {
 .contact-caption {
     margin-top: 120px;
 }
+
+
+.horarios {
+    /*position: absolute;*/
+    width: 100%;
+    height: 650px;
+    /*margin-top: 0px;*/
+    left: 0;
+
+    background: rgba(0, 0, 0, 0.51);
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+}
+
+.horarios table td .number {
+    background: #FFF;
+    border-radius: 12px;
+    padding: 10px 10px;
+    font-weight: bold;
+    color: #373d45;
+    margin-bottom: 4px;
+    border: 1px solid #dbdcdf;
+    clear: both;
+    float: left;
+    /*width: 180px;*/
+}
+
+.horarios table th {
+    background: #f9b989;;
+    font-size: 15px;
+    color: #586069;
+    text-align: center;
+    padding: 10px;
+    /* border-right: 1px solid #fabc90; */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.horarios table tr:nth-child(odd) {
+    background: #f1f8ff;
+    border: 1px solid #c8e1ff;
+}
+
+.horarios table tr:nth-child(even) {
+    background-color: #E8FFFF;
+}
+
+.horarios table td {
+
+    padding: 10px;
+
+}
+.horarios table {
+    border: 1px solid #ddd;
+    margin-bottom: 50px;
+}
+.detalle_sucursales table td .sucursal {
+
+    font-weight: bold;
+    color: black;
+
+}
+
+.horarios table span {
+    font-weight: bold;
+    color: #000;
+}
+
+.td_sucursal  {
+    /*width: 180px;*/
+    font-family: Arial, Helvetica, sans-serif;
+    color: #373d45 !important;
+
+}
+.td_telefonos {
+    /*width: 180px;*/
+    font-family: Arial, Helvetica, sans-serif;
+    color: #373d45 !important;
+}
+.td_email {
+
+    /*width: 180px;*/
+    font-family: Arial, Helvetica, sans-serif;
+    color: #373d45 !important;
+}
+.td_hora_atencion {
+
+    /*width: 180px;*/
+    font-family: Arial, Helvetica, sans-serif;
+    color: #373d45 !important;
+}
+
 
 
 /*footer*/
@@ -742,6 +829,21 @@ body,
     height: 100%;
 }
 
+.has-error{
+    background-color: #f1a5a5!important;
+}
+.doctor-title {
+   font-size: 12px !important;
+   color: #ffffff !important;
+   font-weight: bold !important;
+   text-transform: uppercase !important;
+ }
+.doctor-desc {
+   font-size: 10px !important;
+ }
+
+
+
 /******************************
 responsive area
 ********************************/
@@ -766,7 +868,7 @@ responsive area
         font-size: 26px;
     }
     h2 {
-        font-size: 75px !important;
+        font-size: 65px !important;
     }
     h4 {
         font-size: 22px !important;
@@ -800,7 +902,7 @@ responsive area
         font-size: 22px;
     }
     h2 {
-        font-size: 70px !important;
+        font-size: 60px !important;
     }
     h4 {
         font-size: 18px !important;
@@ -810,7 +912,7 @@ responsive area
         /*height: 1050px;*/
     }
     .contact {
-        margin-top: -1050px;
+        margin-top: 0px;
         height: 1050px;
     }
     .contact-caption {
@@ -847,10 +949,10 @@ responsive area
     }
     .contact {
         height: 1120px;
-        margin-top: -1120px;
+        margin-top: 0px;
     }
     h2 {
-        font-size: 70px !important;
+        font-size: 60px !important;
     }
     h4 {
         font-size: 21px !important;
@@ -918,6 +1020,11 @@ responsive area
         font-size: 50px;
         margin-top: 40px;
     }
+    
+    .service {
+    margin-left: 10px;
+    margin-right: 10px;
+    }    
     .team h2 {
         font-size: 50px;
         margin-top: 40px;
@@ -934,7 +1041,7 @@ responsive area
     }
     .contact {
         height: 950px;
-        margin-top: -950px;
+        margin-top: 0px;
     }
     .contact-heading h2 {
         font-size: 50px;
@@ -975,4 +1082,72 @@ responsive area
         font-size: 10px;
     }
 
+
+    .horarios {
+        width: 100%;
+        height: 650px;
+        left: 0;
+        background: rgba(0, 0, 0, 0.51);
+        margin-top: 40px;
+        margin-bottom: 40px;
+
+    }
+
+    .horarios table td .number {
+        background: #FFF;
+        border-radius: 12px;
+        padding: 5px 5px;
+        font-weight: bold;
+        color: #373d45;
+        margin-bottom: 4px;
+        border: 1px solid #dbdcdf;
+        clear: both;
+        float: left;
+        font-size: 10px;
+    }
+
+    .horarios table th {
+        background: #f9b989;;
+        font-size: 11px;
+        color: #586069;
+        text-align: center;
+        padding: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .horarios table tr:nth-child(odd) {
+        background: #f1f8ff;
+        border: 1px solid #c8e1ff;
+    }
+
+    .horarios table tr:nth-child(even) {
+        background-color: #E8FFFF;
+    }
+
+    .horarios table td {
+
+        padding: 5px;
+        font-size: 10px;
+
+    }
+    .horarios table {
+        border: 1px solid #ddd;
+        margin-bottom: 50px;
+    }
+    .detalle_sucursales table td .sucursal {
+
+        font-weight: bold;
+        color: black;
+
+    }
+
+    .horarios table span {
+        font-weight: bold;
+        color: #000;
+    }    
+
+    .reserva-heading h2 {
+        color: #fff;
+        font-size: 50px;
+    }
 }
